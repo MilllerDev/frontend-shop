@@ -1,4 +1,4 @@
-import { RedirectButton } from "@/shared/components/ui/redirect-button";
+import { RedirectButton } from "@/src/shared/components/ui/redirect-button";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {

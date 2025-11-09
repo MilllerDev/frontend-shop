@@ -1,6 +1,6 @@
-import { login } from "@/features/auth/actions/login.action";
-import Unauthorized from "@/features/auth/components/unauthorized";
-import { Submit } from "@/shared/components/ui/submit-client";
+import { login } from "@/src/features/auth/actions/login.action";
+import Unauthorized from "@/src/features/auth/components/unauthorized";
+import { Submit } from "@/src/shared/components/ui/submit-client";
 import Link from "next/link";
 
 export default async function LoginPage({

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { onest } from "@/shared/font";
+import { onest } from "@/src/shared/font";
 
 export const metadata: Metadata = {
   title: "Shop Managament",
