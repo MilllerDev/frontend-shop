@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { onest } from "@/src/shared/font";
+import { ThemeProvider } from "../shared";
 
 export const metadata: Metadata = {
   title: "Shop Managament",
@@ -13,8 +14,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={`${onest.className} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${onest.className} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

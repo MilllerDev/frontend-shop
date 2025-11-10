@@ -11,7 +11,7 @@ export function RedirectButton({
   return (
     <Link
       href={href}
-      className="flex flex-row gap-4 items-center rounded-xl px-4 py-2 bg-emerald-700 text-white font-medium"
+      className="flex flex-row gap-4 items-center rounded-xl px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium"
     >
       {children}
     </Link>

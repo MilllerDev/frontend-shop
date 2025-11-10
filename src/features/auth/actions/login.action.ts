@@ -8,7 +8,7 @@ export async function login(formData: FormData) {
     pass: formData.get("pass") as string,
   };
   console.log(data);
-  if (data.pass === "1234") {
+  if (data.pass !== "1234") {
     redirect("/auth/login?error=true");
   }
   redirect("/dashboard");

@@ -11,7 +11,7 @@ export function Submit({ children }: { children: ReactNode }) {
     <button
       type="submit"
       disabled={pending}
-      className="rounded-xl bg-emerald-700 text-white text-sm font-medium py-2 px-4 cursor-pointer disabled:opacity-70"
+      className="rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium py-2 px-4 cursor-pointer disabled:opacity-70"
     >
       {pending ? (
         <Loader

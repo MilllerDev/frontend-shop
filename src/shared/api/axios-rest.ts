@@ -11,15 +11,15 @@ const axiosRest = axios.create({
   },
 });
 
-axiosRest.interceptors.response.use(
-  (res) => res,
-  (error) => {
-    console.error(
-      "Error al hacer la petición: ",
-      error.response.data || error.message
-    );
-    return Promise.reject(error);
-  }
-);
+// axiosRest.interceptors.response.use(
+//   (res) => res,
+//   (error) => {
+//     console.error(
+//       "Error al hacer la petición: ",
+//       error.response.data || error.message
+//     );
+//     return Promise.reject(error);
+//   }
+// );
 
 export default axiosRest;
