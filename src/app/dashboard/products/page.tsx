@@ -9,12 +9,7 @@ import {
 } from "@/src/shared/components/ui/card";
 import { Plus } from "lucide-react";
 
-export default async function Products({
-  searchParams,
-}: {
-  searchParams: Promise<{ query?: string; page?: string }>;
-}) {
-  const { query } = await searchParams;
+export default function Products() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "En Stock":
@@ -47,7 +42,7 @@ export default async function Products({
         </CardHeader>
 
         <CardContent className="border-b pb-6 border-primary/20 flex flex-col gap-4">
-          <ProductTable query={query} />
+          <ProductTable />
         </CardContent>
       </Card>
     </div>
