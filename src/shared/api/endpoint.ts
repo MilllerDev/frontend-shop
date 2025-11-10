@@ -1,6 +1,6 @@
 export const API_ENDPONTS = {
   AUTH: {
-    LOGIN: "/",
+    LOGIN: "/auth/login",
   },
   CLIENTS: {
     GET: "/clients",
