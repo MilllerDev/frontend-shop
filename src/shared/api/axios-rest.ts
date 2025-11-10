@@ -1,5 +1,3 @@
-"use server";
-
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -9,6 +7,7 @@ const axiosRest = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 axiosRest.interceptors.response.use(
@@ -16,9 +15,9 @@ axiosRest.interceptors.response.use(
   (error) => {
     console.error(
       "Error al hacer la petición: ",
-      error.response.data || error.message
+      error.response?.data || error.message
     );
-    return Promise.reject(error);
+    return Promise.reject(error.response?.data);
   }
 );
 
