@@ -6,4 +6,11 @@ export const API_ENDPONTS = {
     GET: "/clients",
     BY_ID: (id: string) => `/clients/${id}`,
   },
+  CATEGORIES: {
+    GET: "/categories",
+  },
+  PRODUCTS: {
+    GET: "/products",
+    BY_ID: (id: string) => `/products/${id}`,
+  },
 };
