@@ -8,25 +8,29 @@ import {
   SelectValue,
 } from "@/src/shared/components/ui/select";
 import { getCategories } from "../actions/create.product";
+import { Label } from "@/src/shared/components/ui/label";
 
 export default async function SelectCategories() {
   const categories = await getCategories();
 
   return (
-    <Select name="category">
-      <SelectTrigger className="w-[250px]">
-        <SelectValue placeholder="Seleciona una categoria" />
-      </SelectTrigger>
-      <SelectContent position="popper" className="bg-white">
-        <SelectGroup>
-          <SelectLabel>Categorias</SelectLabel>
-          {categories.map(({ id, name }) => (
-            <SelectItem key={id} value={id}>
-              {name}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="flex flex-col gap-3">
+      <Label htmlFor="category">Categoria</Label>
+      <Select name="category">
+        <SelectTrigger className="col-span-1">
+          <SelectValue placeholder="Seleciona una categoria" />
+        </SelectTrigger>
+        <SelectContent position="popper" className="bg-white">
+          <SelectGroup>
+            <SelectLabel>Categorias</SelectLabel>
+            {categories.map(({ id, name }) => (
+              <SelectItem key={id} value={id}>
+                {name}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

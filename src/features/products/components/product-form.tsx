@@ -6,6 +6,7 @@ import { DialogClose, DialogFooter } from "@/src/shared/components/ui/dialog";
 import { Button } from "@/src/shared";
 import { VariantProduct } from "@/src/shared/types/product";
 import SelectVariants from "./select-variants";
+import ImageUploadPreview from "./image-upload";
 
 export default function ProductForm() {
   return (
@@ -15,14 +16,16 @@ export default function ProductForm() {
           <Label htmlFor="title">Nombre</Label>
           <Input id="title" name="title" placeholder="Jean sm" />
         </div>
-        <div className="grid gap-3">
-          <Label htmlFor="price">Precio</Label>
-          <Input id="price" name="price" placeholder="60" />
-        </div>
-        <div className="grid gap-3">
+        <div className="grid grid-cols-3 gap-3 items-end">
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="price">Precio</Label>
+            <Input id="price" name="price" placeholder="60" />
+          </div>
           <SelectCategories />
         </div>
-        <div className="grid w-full max-w-sm items-center gap-3">
+        {/*         <div className="grid gap-3">
+        </div> */}
+        {/*         <div className="grid w-full max-w-sm items-center gap-3">
           <Label htmlFor="image">Imágen</Label>
           <Input
             id="image"
@@ -30,7 +33,8 @@ export default function ProductForm() {
             type="file"
             accept=".jpg,.jpeg,.png,.webp"
           />
-        </div>
+        </div> */}
+        <ImageUploadPreview />
         <SelectVariants />
       </div>
       <DialogFooter className="mt-6">
