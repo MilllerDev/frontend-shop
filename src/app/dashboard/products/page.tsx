@@ -1,5 +1,6 @@
+import { Modal } from "@/src/features/products/components/modal";
 import ProductTable from "@/src/features/products/components/product-table";
-import { Button } from "@/src/shared";
+import ProductTableSkeleton from "@/src/features/products/components/skeleton";
 import {
   Card,
   CardContent,
@@ -7,9 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
-import { Plus } from "lucide-react";
+import { Suspense } from "react";
 
-export default function Products() {
+export default function ProductPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "En Stock":
@@ -34,15 +35,13 @@ export default function Products() {
                 Gestiona y monitorea tu inventario
               </CardDescription>
             </div>
-            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto shadow-lg shadow-accent/50">
-              <Plus size={18} />
-              Agregar Producto
-            </Button>
+            <Modal />
           </div>
         </CardHeader>
-
         <CardContent className="border-b pb-6 border-primary/20 flex flex-col gap-4">
-          <ProductTable />
+          <Suspense fallback={<ProductTableSkeleton />}>
+            <ProductTable />
+          </Suspense>
         </CardContent>
       </Card>
     </div>

@@ -1,11 +1,10 @@
 export interface Client {
   id: string;
   name: string;
-  phone?: string;
-}
-
-export interface User {
-  token:    string;
-  email:    string;
-  password: string;
+  lastname: string;
+  phone: string;
+  direccion: string;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
