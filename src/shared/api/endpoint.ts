@@ -11,6 +11,7 @@ export const API_ENDPONTS = {
   },
   PRODUCTS: {
     GET: "/products",
+    CREATE: "/products",
     BY_ID: (id: string) => `/products/${id}`,
   },
 };

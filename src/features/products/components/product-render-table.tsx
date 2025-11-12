@@ -21,7 +21,6 @@ export default function ProductRenderTable({
 }) {
   const [query, setQuery] = useState("");
 
-  // 🔍 Filtrado local con useMemo para eficiencia
   const filteredProducts = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) return products;
@@ -67,7 +66,7 @@ export default function ProductRenderTable({
               <TableHead className="text-foreground">Precio</TableHead>
               <TableHead className="text-foreground">Categoría</TableHead>
               {/*<TableHead className="text-foreground">Estado</TableHead>*/}
-              <TableHead className="text-right text-foreground">
+              <TableHead className="text-left text-foreground">
                 Acciones
               </TableHead>
             </TableRow>
@@ -80,12 +79,13 @@ export default function ProductRenderTable({
               >
                 <TableCell className="text-foreground font-medium flex flex-row items-center gap-4">
                   {product.imageUrl && (
-                    <img
-                      src={product.imageUrl}
-                      width={80}
-                      height={80}
-                      className="rounded-md"
-                    />
+                    <div className="relative w-24 h-16 shrink-0 overflow-hidden rounded-xl shadow-sm">
+                      <img
+                        src={product.imageUrl}
+                        className="w-full h-full object-center object-cover "
+                        loading="lazy"
+                      />
+                    </div>
                   )}
                   {product.title}
                 </TableCell>
@@ -110,8 +110,8 @@ export default function ProductRenderTable({
                     {product.status}Miller
                     </Badge>
                     </TableCell> */}
-                <TableCell className="text-right">
-                  <div className="flex items-center justify-end gap-2">
+                <TableCell>
+                  <div className="flex items-center justify-start gap-2">
                     <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                       <Edit2 size={16} />
                     </Button>

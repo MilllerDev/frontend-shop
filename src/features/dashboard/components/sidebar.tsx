@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/src/shared"
-import { LayoutDashboard, Package, BarChart3, Settings, LogOut, Menu, X } from "lucide-react"
+import { LayoutDashboard, Package, BarChart3, Settings, LogOut, Menu, X, UsersRound } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -9,6 +9,7 @@ import { useState } from "react"
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
   { icon: Package, label: "Productos", href: "/dashboard/products" },
+  { icon: UsersRound, label: "Clientes", href: "/dashboard/clients" },
   { icon: BarChart3, label: "Reportes", href: "/dashboard/reports" },
   { icon: Settings, label: "Configuración", href: "/dashboard/settings" },
 ]
@@ -29,7 +30,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed flex flex-col justify-between left-0 top-0 h-screen w-64 bg-gradient-to-b from-primary/20 to-primary/5 border-r border-primary/30 transition-transform duration-300 ease-in-out z-30 md:sticky md:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed flex flex-col justify-between left-0 top-0 h-screen w-64 bg-linear-to-b from-primary/20 to-primary/5 border-r border-primary/30 transition-transform duration-300 ease-in-out z-30 md:sticky md:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         {/* Logo Section */}
