@@ -4,12 +4,19 @@ import { Button } from "@/src/shared";
 import { Input } from "@/src/shared/components/ui/input";
 import { Label } from "@/src/shared/components/ui/label";
 import { VariantProduct } from "@/src/shared/types/product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SelectVariants() {
   const [variants, setVariants] = useState<
     Omit<VariantProduct, "id" | "createdAt" | "updatedAt">[]
   >([]);
+
+  useEffect(() => {
+    const input = document.querySelector<HTMLInputElement>(
+      "input[name='variants']"
+    );
+    if (input) input.value = JSON.stringify(variants);
+  }, [variants]);
 
   const addVariant = () => {
     setVariants([...variants, { sizes: "", color: "", stock: "" }]);
@@ -32,6 +39,7 @@ export default function SelectVariants() {
   return (
     <div className="grid gap-3">
       <Label>Variantes</Label>
+      <input type="hidden" name="variants" />
       <div className="flex flex-col gap-3">
         {variants.map((variant, index) => (
           <div
@@ -39,12 +47,12 @@ export default function SelectVariants() {
             className="flex flex-row gap-3 items-center border p-3 rounded-xl"
           >
             <Input
-              placeholder="Talla (ej. 30)"
+              placeholder="Talla"
               value={variant.sizes}
               onChange={(e) => updateVariant(index, "sizes", e.target.value)}
             />
             <Input
-              placeholder="Color (ej. Negro)"
+              placeholder="Color"
               value={variant.color}
               onChange={(e) => updateVariant(index, "color", e.target.value)}
             />

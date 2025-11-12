@@ -14,15 +14,14 @@ export async function createProduct(formData: FormData) {
   formToSend.append("title", formData.get("title") as string);
   formToSend.append("price", formData.get("price") as string);
   formToSend.append("categoryId", formData.get("category") as string);
-  const variants = [{ sizes: "30", color: "black", stock: 8 }];
-  formToSend.append("variants", JSON.stringify(variants));
+  formToSend.append("variants", formData.get("variants") as string);
 
   const image = formData.get("image");
   if (image && typeof image === "object") {
     const blob = image as Blob;
-    formToSend.append("image", blob, "uploaded-image.png"); // nombre arbitrario
+    formToSend.append("image", blob);
   }
-
+  console.log(formToSend);
   try {
     const res = await axiosRest.post<Product>(
       API_ENDPONTS.PRODUCTS.CREATE,

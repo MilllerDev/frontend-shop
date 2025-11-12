@@ -19,7 +19,7 @@ export function Modal() {
           Agregar Producto
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[450px]">
         <DialogHeader>
           <DialogTitle>Añadir un producto</DialogTitle>
           <DialogDescription>
