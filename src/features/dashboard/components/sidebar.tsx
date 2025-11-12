@@ -113,7 +113,7 @@ export default function Sidebar() {
                         : "text-foreground/80 hover:bg-primary/20 hover:text-foreground hover:translate-x-1"
                         } relative`}
                     >
-                      <item.icon size={18} className="transition-transform duration-300 group-hover:scale-110" />
+                      <item.icon size={18} className="transition-transform duration-300 group-hover:scale-110 ml-1" />
                       <span className="text-sm">{item.label}</span>
                     </Button>
                   </Link>
