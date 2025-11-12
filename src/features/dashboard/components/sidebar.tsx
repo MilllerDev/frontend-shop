@@ -19,7 +19,6 @@ const maintenanceItems = [
 export default function Sidebar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const [isMaintenanceOpen, setIsMaintenanceOpen] = useState(false)
 
   // Check if any maintenance item is active
   const isMaintenanceActive = maintenanceItems.some(item => pathname === item.href)
@@ -77,7 +76,7 @@ export default function Sidebar() {
           >
             <AccordionItem value="maintenance" className="border-none">
               <AccordionTrigger
-                className={`p-0 hover:no-underline group transition-all duration-300 ${isMaintenanceActive ? "" : ""
+                className={`p-0 hover:no-underline group transition-all duration-300 [&>svg]:hidden ${isMaintenanceActive ? "" : ""
                   }`}
               >
                 <Button
@@ -120,7 +119,6 @@ export default function Sidebar() {
                   </Link>
                 ))}
               </AccordionContent>
-              
             </AccordionItem>
           </Accordion>
 

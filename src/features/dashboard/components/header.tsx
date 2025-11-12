@@ -4,11 +4,11 @@ import { Button } from "@/src/shared"
 import { Bell, User, Moon, Sun } from "lucide-react"
 
 import { useTheme } from "next-themes"
-import { useState } from "react"
+
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
-  const [menuOpen, setMenuOpen] = useState(false)
+
 
   return (
     <header className="border-b border-border bg-card">
