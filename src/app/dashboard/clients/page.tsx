@@ -1,5 +1,6 @@
+import { getClients } from "@/src/features/clients/actions/get-clients.action";
 import ClientTable from "@/src/features/clients/components/client-table";
-import { Button } from "@/src/shared";
+import { ModalCreateClient } from "@/src/features/clients/components/moda-create-client";
 import {
   Card,
   CardContent,
@@ -7,10 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
-import { Plus } from "lucide-react";
 import { Suspense } from "react";
 
-export default function ClientPage() {
+
+export default async function ClientPage() {
+  const data = await getClients();
+
+  console.log(data);
   return (
     <div className="min-h-screen bg-background pt-20 md:pt-8 px-4 md:px-8">
       <Card className="border-primary/30 bg-card/50 backdrop-blur">
@@ -24,15 +28,12 @@ export default function ClientPage() {
                 Gestiona y monitorea a tus clientes
               </CardDescription>
             </div>
-            {/* <Button className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto shadow-lg shadow-accent/50">
-              <Plus size={18} />
-              Añadir cliente
-            </Button> */}
+            <ModalCreateClient />
           </div>
         </CardHeader>
         <CardContent className="border-b pb-6 border-primary/20 flex flex-col gap-4">
           <Suspense fallback={<div>Cargando datos</div>}>
-            <ClientTable />
+            <ClientTable/>
           </Suspense>
         </CardContent>
       </Card>

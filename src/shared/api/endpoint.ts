@@ -4,6 +4,7 @@ export const API_ENDPONTS = {
   },
   CLIENTS: {
     GET: "/clients",
+    CREATE: "/clients",
     BY_ID: (id: string) => `/clients/${id}`,
   },
   CATEGORIES: {

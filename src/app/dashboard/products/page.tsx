@@ -3,7 +3,6 @@ import ProductTable from "@/src/features/products/components/product-table";
 import ProductTableSkeleton from "@/src/features/products/components/skeleton";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -17,7 +16,7 @@ export default function ProductPage() {
         <CardHeader className="border-b border-primary/20">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <CardTitle className="text-primary">Productos</CardTitle>
+              <CardTitle className="text-primary">Mantinimiento de Productos</CardTitle>
               <CardDescription className="mt-1">
                 Gestiona y monitorea tu inventario
               </CardDescription>

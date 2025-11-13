@@ -5,6 +5,8 @@ import { API_ENDPONTS } from "@/src/shared/api/endpoint";
 import { Client } from "@/src/shared/types/client";
 import { cookies } from "next/headers";
 
+
+
 export async function getClients(): Promise<Client[]> {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
@@ -15,3 +17,4 @@ export async function getClients(): Promise<Client[]> {
   });
   return res.data as Client[];
 }
+
