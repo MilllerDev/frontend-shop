@@ -26,10 +26,10 @@ export default async function Page({
   const { variantProduct } = product;
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
+    <div className="p-8 bg-background min-h-screen">
       <div className="mb-8">
         <BackButton text="Volver a Productos" />
-        <p className="text-gray-600">Actualiza los detalles del producto</p>
+        <p className="">Actualiza los detalles del producto</p>
       </div>
 
       <form action={updateProduct} className="space-y-6">
@@ -61,7 +61,7 @@ export default async function Page({
                       id="description"
                       name="description"
                       defaultValue={product.description || ""}
-                      className="text-sm resize-none w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="text-sm resize-none w-full px-4 py-2 border  rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -82,7 +82,7 @@ export default async function Page({
               <CardFooter className="flex flex-row gap-4">
                 <Link
                   href="/dashboard/products"
-                  className="flex-1 border border-gray-100 rounded-md p-2 text-center text-sm font-medium"
+                  className="flex-1 border rounded-md p-2 text-center text-sm font-medium"
                 >
                   Cancelar
                 </Link>
