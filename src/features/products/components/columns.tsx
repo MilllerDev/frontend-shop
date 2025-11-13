@@ -4,6 +4,7 @@ import { Button } from "@/src/shared";
 import { Product } from "@/src/shared/types/product";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit2, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -47,9 +48,16 @@ export const columns: ColumnDef<Product>[] = [
     accessorKey: "actions",
     header: "Acciones",
     cell: ({ row }) => {
+      const router = useRouter();
+      const id = row.original.id;
       return (
         <div className="flex items-center justify-start gap-2">
-          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+          <Button
+            onClick={() => router.push(`/dashboard/products/${id}`)}
+            variant="ghost"
+            size="sm"
+            className="h-8 w-8 p-0"
+          >
             <Edit2 size={16} />
           </Button>
           <Button

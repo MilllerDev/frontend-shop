@@ -6,10 +6,22 @@ import { Label } from "@/src/shared/components/ui/label";
 import { VariantProduct } from "@/src/shared/types/product";
 import { useEffect, useState } from "react";
 
-export default function SelectVariants() {
+interface SelectVariantsProps {
+  defaultVariants?: VariantProduct[];
+}
+
+export default function SelectVariants({
+  defaultVariants = [],
+}: SelectVariantsProps) {
   const [variants, setVariants] = useState<
     Omit<VariantProduct, "id" | "createdAt" | "updatedAt">[]
-  >([]);
+  >(
+    defaultVariants.map((v) => ({
+      sizes: v.sizes,
+      color: v.color,
+      stock: v.stock,
+    }))
+  );
 
   useEffect(() => {
     const input = document.querySelector<HTMLInputElement>(
@@ -37,10 +49,10 @@ export default function SelectVariants() {
   };
 
   return (
-    <div className="grid gap-3">
+    <div className="grid gap-2">
       <Label>Variantes</Label>
       <input type="hidden" name="variants" />
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         {variants.map((variant, index) => (
           <div
             key={index}

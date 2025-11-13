@@ -3,10 +3,9 @@ import { Label } from "@/src/shared/components/ui/label";
 import { createProduct } from "../actions/create.product";
 import SelectCategories from "./select-categories";
 import { DialogClose, DialogFooter } from "@/src/shared/components/ui/dialog";
-import { Button } from "@/src/shared";
-import { VariantProduct } from "@/src/shared/types/product";
+import { Button, Submit } from "@/src/shared";
 import SelectVariants from "./select-variants";
-import ImageUploadPreview from "./image-upload";
+import { UploadImage } from "./image-upload";
 
 export default function ProductForm() {
   return (
@@ -23,25 +22,14 @@ export default function ProductForm() {
           </div>
           <SelectCategories />
         </div>
-        {/*         <div className="grid gap-3">
-        </div> */}
-        {/*         <div className="grid w-full max-w-sm items-center gap-3">
-          <Label htmlFor="image">Imágen</Label>
-          <Input
-            id="image"
-            name="image"
-            type="file"
-            accept=".jpg,.jpeg,.png,.webp"
-          />
-        </div> */}
-        <ImageUploadPreview />
+        <UploadImage />
         <SelectVariants />
       </div>
       <DialogFooter className="mt-6">
         <DialogClose asChild>
           <Button variant="outline">Cancelar</Button>
         </DialogClose>
-        <Button type="submit">Guardar</Button>
+        <Submit>Guardar</Submit>
       </DialogFooter>
     </form>
   );
