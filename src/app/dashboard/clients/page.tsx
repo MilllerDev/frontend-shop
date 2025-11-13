@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import { getClients } from "@/src/features/clients/actions/get-clients.action";
-import { columnsClient } from "@/src/features/clients/components/columns-client";
-import { DataTableClients } from "@/src/features/clients/components/data-table-clients";
-import { ModalCreateClient } from "@/src/features/clients/components/moda-create-client";
-=======
 import ClientTable from "@/src/features/clients/components/client-table";
-import { Button } from "@/src/shared";
->>>>>>> origin
+import { ModalCreateClient } from "@/src/features/clients/components/moda-create-client";
 import {
   Card,
   CardContent,
@@ -15,8 +9,6 @@ import {
   CardTitle,
 } from "@/src/shared/components/ui/card";
 import { Suspense } from "react";
-
-
 
 
 export default async function ClientPage() {
@@ -41,11 +33,7 @@ export default async function ClientPage() {
         </CardHeader>
         <CardContent className="border-b pb-6 border-primary/20 flex flex-col gap-4">
           <Suspense fallback={<div>Cargando datos</div>}>
-<<<<<<< HEAD
-            <DataTableClients columns={columnsClient} data={data} />
-=======
-            <ClientTable />
->>>>>>> origin
+            <ClientTable/>
           </Suspense>
         </CardContent>
       </Card>
