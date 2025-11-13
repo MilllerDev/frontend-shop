@@ -10,13 +10,17 @@ import {
 import { getCategories } from "../actions/create.product";
 import { Label } from "@/src/shared/components/ui/label";
 
-export default async function SelectCategories() {
+type SelectyProps = {
+  defaultId?: string;
+};
+
+export default async function SelectCategories({ defaultId }: SelectyProps) {
   const categories = await getCategories();
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       <Label htmlFor="category">Categoria</Label>
-      <Select name="category">
+      <Select name="category" defaultValue={defaultId}>
         <SelectTrigger className="col-span-1">
           <SelectValue placeholder="Seleciona una categoria" />
         </SelectTrigger>

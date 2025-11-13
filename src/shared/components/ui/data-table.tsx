@@ -21,16 +21,18 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { CardContent, CardFooter } from "@/src/shared/components/ui/card";
+import { CardContent } from "@/src/shared/components/ui/card";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  searchKey: string;
 }
 
-export default function ProductRenderTable<TData, TValue>({
+export default function DataTable<TData, TValue>({
   columns,
   data,
+  searchKey,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -55,12 +57,12 @@ export default function ProductRenderTable<TData, TValue>({
             <Input
               autoComplete="off"
               value={
-                (table.getColumn("title")?.getFilterValue() as string) ?? ""
+                (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table.getColumn("title")?.setFilterValue(event.target.value)
+                table.getColumn(searchKey)?.setFilterValue(event.target.value)
               }
-              placeholder="Buscar productos..."
+              placeholder="Buscar ..."
               className="pl-10 bg-input border-primary/30 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/50"
             />
           </div>
@@ -137,7 +139,7 @@ export default function ProductRenderTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          Anterior
         </Button>
         <Button
           variant="outline"
@@ -145,7 +147,7 @@ export default function ProductRenderTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          Siguiente
         </Button>
       </div>
     </>

@@ -21,7 +21,11 @@ export default function ProductPage() {
                 Gestiona y monitorea tu inventario
               </CardDescription>
             </div>
-            <Modal />
+            <Modal
+              textButton="Agregar Producto"
+              title="Añadir un producto"
+              description="Agrega un producto al inventario"
+            />
           </div>
         </CardHeader>
         <Suspense fallback={<ProductTableSkeleton />}>

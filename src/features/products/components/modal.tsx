@@ -10,21 +10,25 @@ import {
 import { Plus } from "lucide-react";
 import ProductForm from "./product-form";
 
-export function Modal() {
+interface ModalProps {
+  textButton: string;
+  title: string;
+  description: string;
+}
+
+export function Modal({ textButton, title, description }: ModalProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">
           <Plus size={18} />
-          Agregar Producto
+          {textButton}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[450px]">
         <DialogHeader>
-          <DialogTitle>Añadir un producto</DialogTitle>
-          <DialogDescription>
-            Agrega un producto al inventario
-          </DialogDescription>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <ProductForm />
       </DialogContent>

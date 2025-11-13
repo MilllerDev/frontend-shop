@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import { getClients } from "@/src/features/clients/actions/get-clients.action";
 import { columnsClient } from "@/src/features/clients/components/columns-client";
 import { DataTableClients } from "@/src/features/clients/components/data-table-clients";
 import { ModalCreateClient } from "@/src/features/clients/components/moda-create-client";
+=======
+import ClientTable from "@/src/features/clients/components/client-table";
+import { Button } from "@/src/shared";
+>>>>>>> origin
 import {
   Card,
   CardContent,
@@ -24,7 +29,9 @@ export default async function ClientPage() {
         <CardHeader className="border-b border-primary/20">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <CardTitle className="text-primary">Mantinimiento de Clientes</CardTitle>
+              <CardTitle className="text-primary">
+                Mantinimiento de Clientes
+              </CardTitle>
               <CardDescription className="mt-1">
                 Gestiona y monitorea a tus clientes
               </CardDescription>
@@ -34,7 +41,11 @@ export default async function ClientPage() {
         </CardHeader>
         <CardContent className="border-b pb-6 border-primary/20 flex flex-col gap-4">
           <Suspense fallback={<div>Cargando datos</div>}>
+<<<<<<< HEAD
             <DataTableClients columns={columnsClient} data={data} />
+=======
+            <ClientTable />
+>>>>>>> origin
           </Suspense>
         </CardContent>
       </Card>
