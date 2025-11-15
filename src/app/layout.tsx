@@ -23,7 +23,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster position="top-right"/>
+          <Toaster position="top-right" className="bg-background"/>
           {children}
         </ThemeProvider>
       </body>

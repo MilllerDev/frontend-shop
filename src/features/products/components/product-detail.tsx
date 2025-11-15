@@ -4,24 +4,24 @@ export default function ProductDetail({ product }: { product: Product }) {
   return (
     <div className="space-y-">
       <div className="grid grid-cols-2 gap-4">
-          <div className="size-40 overflow-hidden rounded-xl border border-border shadow-sm">
-            <img
-              src={product.imageUrl}
-              alt={`Imagen de ${product.title}`}
-              className="w-full h-full object-cover object-center"
-            />
+        <div className="size-40 overflow-hidden rounded-xl border border-border shadow-sm">
+          <img
+            src={product.imageUrl}
+            alt={`Imagen de ${product.title}`}
+            className="w-full h-full object-cover object-center"
+          />
         </div>
         <div>
           <div className="flex flex-row gap-4 items-center border-b border-gray-200 pb-2">
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-foreground">
               Precio
             </label>
-            <p className="text-base text-foreground font-medium">
+            <p className="text-base text-muted-foreground font-medium">
               S/ {product.price}
             </p>
           </div>
           <div className="flex flex-row gap-4 items-center border-b border-gray-200 py-2">
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-foreground">
               Estado
             </label>
             <div className="text-sm flex items-center">
@@ -47,18 +47,18 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <div className="flex flex-row gap-4 items-center border-b border-gray-200 py-2">
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-foreground">
               Categoría
             </label>
-            <p className="text-gray-900 text-base font-medium">
+            <p className="text-muted-foreground text-base font-medium">
               {product.category.name}
             </p>
           </div>
           <div className="flex flex-row gap-4 items-center border-b border-gray-200 py-2">
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-foreground">
               Stock Total
             </label>
-            <p className="text-gray-900 font-medium text-base">
+            <p className="text-muted-foreground font-medium text-base">
               {product.variantProduct.reduce(
                 (acc, v) => acc + parseInt(v.stock),
                 0
@@ -72,15 +72,20 @@ export default function ProductDetail({ product }: { product: Product }) {
         <label className="text-sm font-semibold text-gray-600">Variantes</label>
         {product.variantProduct.length > 0 ? (
           product.variantProduct.map((variant) => (
-            <div key={variant.id} className="bg-gray-50 py-2 rounded-lg flex items-center justify-between">
+            <div
+              key={variant.id}
+              className="py-2 rounded-lg flex items-center justify-between"
+            >
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">Color:</span>
-                  <span className="text-sm font-medium text-gray-900 capitalize">
+                  <span className="text-sm text-muted-foreground">Color:</span>
+                  <span className="text-sm font-medium text-foreground">
                     {variant.color}
                   </span>
-                  <span className="text-sm text-gray-600 ml-4">Talla:</span>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm text-muted-foreground ml-4">
+                    Talla:
+                  </span>
+                  <span className="text-sm font-medium text-foreground">
                     {variant.sizes}
                   </span>
                 </div>

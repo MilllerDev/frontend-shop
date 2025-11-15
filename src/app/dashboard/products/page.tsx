@@ -30,7 +30,7 @@ export default function ProductPage() {
               child={
                 <Button className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto shadow-lg shadow-accent/50">
                   <Plus size={18} />
-                  Agregar Cliente
+                  Agregar Producto
                 </Button>
               }
               title="Añadir un producto"

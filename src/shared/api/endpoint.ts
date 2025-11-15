@@ -1,4 +1,4 @@
-export const API_ENDPONTS = {
+export const API_ROOT = {
   AUTH: {
     LOGIN: "/auth/login",
     GET: "/auth/check-auth-status",
@@ -18,5 +18,6 @@ export const API_ENDPONTS = {
   },
   SALES: {
     GET: "/sales",
+    POST: "/sales",
   },
 };
