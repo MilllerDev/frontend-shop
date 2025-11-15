@@ -1,10 +1,14 @@
+import SaleForm from "@/src/features/sales/components/sale-form";
 import SaleTable from "@/src/features/sales/components/sale-table";
+import { Button } from "@/src/shared";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
+import { Modal } from "@/src/shared/components/ui/modal";
+import { Plus } from "lucide-react";
 import { Suspense } from "react";
 
 export default function SalesPage() {
@@ -19,6 +23,18 @@ export default function SalesPage() {
                 Monitorea todas tus ventas aquí
               </CardDescription>
             </div>
+            <Modal
+              child={
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto shadow-lg shadow-accent/50">
+                  <Plus size={18} />
+                  Agregar venta
+                </Button>
+              }
+              title="Generar una venta"
+              description="Añade una nueva venta al sistema"
+            >
+              <SaleForm />
+            </Modal>
           </div>
         </CardHeader>
         <Suspense fallback={<div>Cargando</div>}>

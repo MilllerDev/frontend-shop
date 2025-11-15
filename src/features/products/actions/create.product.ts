@@ -1,7 +1,7 @@
 "use server";
 
 import axiosRest from "@/src/shared/api/axios-rest";
-import { API_ENDPONTS } from "@/src/shared/api/endpoint";
+import { API_ROOT } from "@/src/shared/api/endpoint";
 import { Category, Product } from "@/src/shared/types/product";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -24,7 +24,7 @@ export async function createProduct(formData: FormData) {
   console.log(formToSend);
   try {
     const res = await axiosRest.post<Product>(
-      API_ENDPONTS.PRODUCTS.CREATE,
+      API_ROOT.PRODUCTS.CREATE,
       formToSend,
       {
         headers: {
@@ -50,7 +50,7 @@ export async function createProduct(formData: FormData) {
 export async function getCategories(): Promise<Category[]> {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-  const res = await axiosRest.get(API_ENDPONTS.CATEGORIES.GET, {
+  const res = await axiosRest.get(API_ROOT.CATEGORIES.GET, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

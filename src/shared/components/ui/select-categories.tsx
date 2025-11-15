@@ -36,7 +36,7 @@ export default function SelectCategories({ defaultId }: SelectyProps) {
         <SelectTrigger className="col-span-1">
           <SelectValue placeholder="Seleciona una categoria" />
         </SelectTrigger>
-        <SelectContent position="popper" className="bg-white">
+        <SelectContent position="popper" className="bg-background">
           <SelectGroup>
             <SelectLabel>Categorias</SelectLabel>
             {categories.map(({ id, name }) => (

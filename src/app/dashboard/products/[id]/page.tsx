@@ -26,7 +26,7 @@ export default async function Page({
   const { variantProduct } = product;
 
   return (
-    <div className="p-8 bg-background min-h-screen">
+    <div className="min-h-screen bg-background pt-20 md:py-8 px-4 md:px-8">
       <div className="mb-8">
         <BackButton text="Volver a Productos" />
         <p className="">Actualiza los detalles del producto</p>

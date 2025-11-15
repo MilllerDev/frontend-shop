@@ -1,8 +1,8 @@
 "use server";
 
 import axiosRest from "@/src/shared/api/axios-rest";
-import { API_ENDPONTS } from "@/src/shared/api/endpoint";
-import { Category, Product } from "@/src/shared/types/product";
+import { API_ROOT } from "@/src/shared/api/endpoint";
+import { Product } from "@/src/shared/types/product";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -26,7 +26,7 @@ export async function updateProduct(formData: FormData) {
   console.log(formToSend);
   try {
     const res = await axiosRest.patch<Product>(
-      API_ENDPONTS.PRODUCTS.BY_ID(id),
+      API_ROOT.PRODUCTS.BY_ID(id),
       formToSend,
       {
         headers: {
