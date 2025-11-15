@@ -1,12 +1,15 @@
-import { Modal } from "@/src/features/products/components/modal";
+import { Modal } from "@/src/shared/components/ui/modal";
+import ProductForm from "@/src/features/products/components/product-form";
 import ProductTable from "@/src/features/products/components/product-table";
 import ProductTableSkeleton from "@/src/features/products/components/skeleton";
+import { Button } from "@/src/shared";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
+import { Plus } from "lucide-react";
 import { Suspense } from "react";
 
 export default function ProductPage() {
@@ -16,16 +19,25 @@ export default function ProductPage() {
         <CardHeader className="border-b border-primary/20">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <CardTitle className="text-primary">Mantinimiento de Productos</CardTitle>
+              <CardTitle className="text-primary">
+                Mantinimiento de Productos
+              </CardTitle>
               <CardDescription className="mt-1">
                 Gestiona y monitorea tu inventario
               </CardDescription>
             </div>
             <Modal
-              textButton="Agregar Producto"
+              child={
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto shadow-lg shadow-accent/50">
+                  <Plus size={18} />
+                  Agregar Cliente
+                </Button>
+              }
               title="Añadir un producto"
               description="Agrega un producto al inventario"
-            />
+            >
+              <ProductForm />
+            </Modal>
           </div>
         </CardHeader>
         <Suspense fallback={<ProductTableSkeleton />}>

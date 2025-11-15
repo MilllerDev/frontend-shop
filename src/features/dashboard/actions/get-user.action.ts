@@ -2,10 +2,18 @@
 
 import axiosRest from "@/src/shared/api/axios-rest";
 import { API_ENDPONTS } from "@/src/shared/api/endpoint";
-import { Client } from "@/src/shared/types/client";
+import { User } from "@/src/shared/types/user";
+import { cookies } from "next/headers";
 
-export async function getUsers(): Promise<Client[]> {
-  const data = await axiosRest.get<Client[]>(API_ENDPONTS.CLIENTS.GET);
-  console.log(data);
+export async function getUser(): Promise<User> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
+  const data = await axiosRest.get<User>(API_ENDPONTS.AUTH.GET, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(data.data);
   return data.data;
 }

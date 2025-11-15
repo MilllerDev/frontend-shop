@@ -3,7 +3,8 @@
 import { Button } from "@/src/shared";
 import { Input } from "@/src/shared/components/ui/input";
 import { Label } from "@/src/shared/components/ui/label";
-import { VariantProduct } from "@/src/shared/types/product";
+import { VariantProduct } from "@/src/shared/types/variant";
+import { UpdateVariant } from "@/src/shared/types/variant";
 import { useEffect, useState } from "react";
 
 interface SelectVariantsProps {
@@ -13,10 +14,9 @@ interface SelectVariantsProps {
 export default function SelectVariants({
   defaultVariants = [],
 }: SelectVariantsProps) {
-  const [variants, setVariants] = useState<
-    Omit<VariantProduct, "id" | "createdAt" | "updatedAt">[]
-  >(
+  const [variants, setVariants] = useState<UpdateVariant[]>(
     defaultVariants.map((v) => ({
+      id: v.id,
       sizes: v.sizes,
       color: v.color,
       stock: v.stock,
