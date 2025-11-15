@@ -1,10 +1,10 @@
 "use client";
 
 import { formatDate } from "@/src/lib/utils";
-import { ClientResponse } from "@/src/shared/types/client";
+import { Client } from "@/src/shared/types/client";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const clientColumns: ColumnDef<ClientResponse>[] = [
+export const clientColumns: ColumnDef<Client>[] = [
   {
     accessorKey: "name",
     header: "Nombre",

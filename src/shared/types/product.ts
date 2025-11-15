@@ -1,3 +1,5 @@
+import { VariantProduct } from "./variant";
+
 export interface Product {
   id: string;
   title: string;
@@ -17,11 +19,4 @@ export interface Category {
   description: string;
 }
 
-export interface VariantProduct {
-  id: string;
-  sizes: string;
-  color: string;
-  stock: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+

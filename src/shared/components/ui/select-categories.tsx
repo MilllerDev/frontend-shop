@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -7,15 +9,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/shared/components/ui/select";
-import { getCategories } from "../actions/create.product";
 import { Label } from "@/src/shared/components/ui/label";
+import { useEffect, useState } from "react";
+import { Category } from "@/src/shared/types/product";
+import { getCategories } from "@/src/features/products/actions/create.product";
 
 type SelectyProps = {
   defaultId?: string;
 };
 
-export default async function SelectCategories({ defaultId }: SelectyProps) {
-  const categories = await getCategories();
+export default function SelectCategories({ defaultId }: SelectyProps) {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function loadCategories() {
+      const data = await getCategories();
+      setCategories(data);
+    }
+    loadCategories();
+  }, []);
 
   return (
     <div className="flex flex-col gap-2">

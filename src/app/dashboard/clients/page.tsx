@@ -1,15 +1,16 @@
 import { getClients } from "@/src/features/clients/actions/get-clients.action";
 import ClientTable from "@/src/features/clients/components/client-table";
-import { ModalCreateClient } from "@/src/features/clients/components/moda-create-client";
+import { CreateClientForm } from "@/src/features/clients/components/create-client-form";
+import { Modal } from "@/src/shared/components/ui/modal";
+import { Button } from "@/src/shared";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
+import { Plus } from "lucide-react";
 import { Suspense } from "react";
-
 
 export default async function ClientPage() {
   const data = await getClients();
@@ -28,14 +29,23 @@ export default async function ClientPage() {
                 Gestiona y monitorea a tus clientes
               </CardDescription>
             </div>
-            <ModalCreateClient />
+            <Modal
+              child={
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground w-full md:w-auto shadow-lg shadow-accent/50">
+                  <Plus size={18} />
+                  Agregar Cliente
+                </Button>
+              }
+              title="Añadir un cliente"
+              description="Agrega un cliente y da seguimiento a sus pedidos"
+            >
+              <CreateClientForm />
+            </Modal>
           </div>
         </CardHeader>
-        <CardContent className="border-b pb-6 border-primary/20 flex flex-col gap-4">
-          <Suspense fallback={<div>Cargando datos</div>}>
-            <ClientTable/>
-          </Suspense>
-        </CardContent>
+        <Suspense fallback={<div>Cargando datos</div>}>
+          <ClientTable />
+        </Suspense>
       </Card>
     </div>
   );

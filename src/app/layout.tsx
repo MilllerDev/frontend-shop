@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { onest } from "@/src/shared/font";
 import { ThemeProvider } from "../shared";
+import { Toaster } from "../shared/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Shop Managament",
@@ -22,6 +23,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster position="top-right"/>
           {children}
         </ThemeProvider>
       </body>

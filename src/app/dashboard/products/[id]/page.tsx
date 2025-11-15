@@ -1,8 +1,7 @@
 import { getProductById } from "@/src/features/products/actions/get-products.action";
 import { updateProduct } from "@/src/features/products/actions/update-product";
 import { ChangeImage } from "@/src/features/products/components/image-upload";
-import SelectCategories from "@/src/features/products/components/select-categories";
-import SelectVariants from "@/src/features/products/components/select-variants";
+import SelectVariants from "@/src/shared/components/ui/select-variants";
 import { Button } from "@/src/shared";
 import { BackButton } from "@/src/shared/components/ui/back-button";
 import {
@@ -15,6 +14,7 @@ import {
 import { Input } from "@/src/shared/components/ui/input";
 import { Label } from "@/src/shared/components/ui/label";
 import Link from "next/link";
+import SelectCategories from "@/src/shared/components/ui/select-categories";
 
 export default async function Page({
   params,

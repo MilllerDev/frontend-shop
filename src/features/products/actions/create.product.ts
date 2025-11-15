@@ -40,8 +40,10 @@ export async function createProduct(formData: FormData) {
     }
 
     revalidatePath("/dashboard");
+    return { ok: true };
   } catch (err: any) {
     console.error("Error al hacer la petición: ", err.response?.data || err);
+    return { ok: false };
   }
 }
 

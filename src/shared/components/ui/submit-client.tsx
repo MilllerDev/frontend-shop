@@ -3,6 +3,9 @@
 import { Loader } from "lucide-react";
 import { ReactNode } from "react";
 import { useFormStatus } from "react-dom";
+import { Button } from "./button";
+import { toast } from "sonner";
+import { getUser } from "@/src/features/dashboard/actions/get-user.action";
 
 export function Submit({ children }: { children: ReactNode }) {
   const { pending } = useFormStatus();
@@ -23,5 +26,30 @@ export function Submit({ children }: { children: ReactNode }) {
         children
       )}
     </button>
+  );
+}
+
+export function SubmitForm() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      type="button"
+      className="bg-black"
+      onClick={() => {
+        toast.promise(
+          async () => {
+            await getUser();
+          },
+          {
+            loading: "Loading...",
+            success: "has been created exitosamente",
+            error: "Error",
+          }
+        );
+      }}
+    >
+      {pending ? "Guardando..." : "Guardar"}
+    </Button>
   );
 }

@@ -44,8 +44,10 @@ export default function ProductTableSkeleton() {
               <TableRow className="border-b border-border hover:bg-transparent">
                 <TableHead className="text-foreground">Producto</TableHead>
                 <TableHead className="text-foreground">SKU</TableHead>
-                <TableHead className="text-foreground">Precio</TableHead>
+                <TableHead className="text-foreground"> Precio</TableHead>
                 <TableHead className="text-foreground">Categoría</TableHead>
+                <TableHead className="text-foreground">Stock</TableHead>
+                <TableHead className="text-foreground">Estado</TableHead>
                 <TableHead className="text-start text-foreground">
                   Acciones
                 </TableHead>
@@ -63,10 +65,16 @@ export default function ProductTableSkeleton() {
                     <Skeleton className="relative w-36 h-4 shrink-0 overflow-hidden rounded-xl shadow-sm opacity-50" />
                   </TableCell>
                   <TableCell>
-                    <Skeleton className="h-4 w-36 opacity-50" />
+                    <Skeleton className="h-4 w-34 opacity-50" />
                   </TableCell>
                   <TableCell>
                     <Skeleton className="h-4 w-10 opacity-50" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-24 opacity-50" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-5 opacity-50" />
                   </TableCell>
                   <TableCell>
                     <Skeleton className="h-4 w-24 opacity-50" />

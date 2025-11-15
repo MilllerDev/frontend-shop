@@ -1,15 +1,34 @@
+"use client";
+
 import { Input } from "@/src/shared/components/ui/input";
 import { Label } from "@/src/shared/components/ui/label";
 import { createProduct } from "../actions/create.product";
-import SelectCategories from "./select-categories";
 import { DialogClose, DialogFooter } from "@/src/shared/components/ui/dialog";
-import { Button, Submit } from "@/src/shared";
-import SelectVariants from "./select-variants";
+import { Button } from "@/src/shared";
 import { UploadImage } from "./image-upload";
+import { useTransition } from "react";
+import { toast } from "sonner";
+import SelectCategories from "@/src/shared/components/ui/select-categories";
+import SelectVariants from "@/src/shared/components/ui/select-variants";
 
-export default function ProductForm() {
+export default function ProductForm({ onSuccess }: { onSuccess?: () => void }) {
+  const [pending, startTransition] = useTransition();
+
+  const handleAction = async (formData: FormData) => {
+    startTransition(async () => {
+      const result = await createProduct(formData);
+      onSuccess?.();
+
+      if (result?.ok) {
+        toast.success("Producto creado");
+      } else {
+        toast.error("Error al crear producto");
+      }
+    });
+  };
+
   return (
-    <form action={createProduct}>
+    <form action={handleAction}>
       <div className="grid gap-4">
         <div className="grid gap-3">
           <Label htmlFor="title">Nombre</Label>
@@ -29,7 +48,9 @@ export default function ProductForm() {
         <DialogClose asChild>
           <Button variant="outline">Cancelar</Button>
         </DialogClose>
-        <Submit>Guardar</Submit>
+        <Button type="submit" disabled={pending}>
+          {pending ? "Guardando..." : "Guardar"}
+        </Button>
       </DialogFooter>
     </form>
   );

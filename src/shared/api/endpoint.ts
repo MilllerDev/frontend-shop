@@ -1,6 +1,7 @@
 export const API_ENDPONTS = {
   AUTH: {
     LOGIN: "/auth/login",
+    GET: "/auth/check-auth-status",
   },
   CLIENTS: {
     GET: "/clients",
@@ -14,5 +15,8 @@ export const API_ENDPONTS = {
     GET: "/products",
     CREATE: "/products",
     BY_ID: (id: string) => `/products/${id}`,
+  },
+  SALES: {
+    GET: "/sales",
   },
 };

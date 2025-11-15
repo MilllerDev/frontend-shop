@@ -1,80 +1,47 @@
-"use client"
+"use client";
 
 import { Button } from "@/src/shared";
 import { DialogClose, DialogFooter } from "@/src/shared/components/ui/dialog";
 import { Input } from "@/src/shared/components/ui/input";
 import { Label } from "@/src/shared/components/ui/label";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form";
 import { createClient } from "../actions/create-client.action";
-import Swal from 'sweetalert2'
+import { toast } from "sonner";
 
 interface Props {
-  onSuccess: () => void
+  onSuccess?: () => void;
 }
 
 type Inputs = {
   name: string;
   lastname: string;
   phone: string;
-  direccion?: string
-}
+  direccion?: string;
+};
 
 export const CreateClientForm = ({ onSuccess }: Props) => {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting }
-  } = useForm<Inputs>()
-
-  const showSuccessToast = () => {
-    Swal.fire({
-      title: '¡Cliente creado!',
-      text: 'El cliente se ha registrado exitosamente',
-      icon: 'success',
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      background: '#f0fdf4',
-      iconColor: '#22c55e'
-    })
-  }
-
-  const showErrorToast = (message: string = 'Error al crear el cliente') => {
-    Swal.fire({
-      title: '¡Error!',
-      text: message,
-      icon: 'error',
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 4000,
-      timerProgressBar: true,
-      background: '#fef2f2',
-      iconColor: '#ef4444'
-    })
-  }
+    formState: { isSubmitting },
+  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const resp = await createClient(data);
 
-      if (!resp?.id) {
-        showErrorToast();
-        return;
+      if (resp?.id) {
+        toast.success("Cliente creado");
+      } else {
+        toast.error("Error al crear cliente");
       }
-
-      showSuccessToast();
-      onSuccess();
+      onSuccess?.();
       reset();
-
     } catch (error) {
-      console.error('Error creating client:', error);
-      showErrorToast('Ha ocurrido un error inesperado');
+      console.error("Error creating client:", error);
     }
-  }
+  };
 
   return (
     <>
@@ -119,13 +86,15 @@ export const CreateClientForm = ({ onSuccess }: Props) => {
         </div>
         <DialogFooter className="mt-6">
           <DialogClose asChild>
-            <Button variant="outline" type="button">Cancelar</Button>
+            <Button variant="outline" type="button">
+              Cancelar
+            </Button>
           </DialogClose>
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
+            {isSubmitting ? "Guardando..." : "Guardar"}
           </Button>
         </DialogFooter>
       </form>
     </>
-  )
-}
+  );
+};
