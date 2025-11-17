@@ -1,15 +1,18 @@
+import { Category } from "@/src/shared/types/product";
 import { create } from "zustand";
 
-interface CartItem {
+export interface CartItem {
   id: string;
-  productId: string;
-  productName: string;
-  variantId: string;
+  name: string;
+  sku: string;
+  imageUrl: string;
   color: string;
   size: string;
   stock: string;
   quantity: number;
   price: string;
+  variantId: string;
+  category: Category;
 }
 
 interface SaleStore {
@@ -33,20 +36,26 @@ export const useSaleStore = create<SaleStore>((set) => ({
 
   addItem: (newItem) =>
     set((state) => {
-      const exists = state.items.find((i) => i.id === newItem.id);
+      const exists = state.items.find(
+        (i) => i.id === newItem.id && i.variantId === newItem.variantId
+      );
 
       if (exists) {
+        const newQuantity = exists.quantity + newItem.quantity;
+        const maxQuantity = Math.min(newQuantity, Number(newItem.stock));
         return {
           items: state.items.map((i) =>
-            i.id === newItem.id
-              ? { ...i, quantity: i.quantity + newItem.quantity }
+            i.id === newItem.id && i.variantId === newItem.variantId
+              ? { ...i, quantity: maxQuantity }
               : i
           ),
         };
       }
 
+      const finalQuantity = Math.min(newItem.quantity, Number(newItem.stock));
+
       return {
-        items: [...state.items, newItem],
+        items: [...state.items, { ...newItem, quantity: finalQuantity }],
       };
     }),
 

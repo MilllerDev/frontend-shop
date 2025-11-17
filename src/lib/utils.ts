@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { CartItem } from "../features/sales/store/sale.store";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,4 +13,14 @@ export function formatDate(fecha: string): string {
   const anio = convert.getUTCFullYear();
 
   return `${dia}-${mes}-${anio}`;
+}
+
+export function salePayload(items: CartItem[]) {
+  return {
+    details: items.map((item) => ({
+      quantity: item.quantity,
+      unitPrice: item.price,
+      variantProductId: item.variantId,
+    })),
+  };
 }

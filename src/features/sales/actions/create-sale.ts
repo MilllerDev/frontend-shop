@@ -8,20 +8,25 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function createSale(formData: FormData) {
-  /*   const cookieStore = await cookies();
+  const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-  const res = await axiosRest.post<Sale>(API_ROOT.SALES.POST, formData, {
+  const rawPayload = formData.get("payload") as string;
+
+  const data = {
+    clientId: formData.get("client") as string,
+    /*     status: formData.get("status") as string,
+     */ ...JSON.parse(rawPayload),
+  };
+
+  console.log("Data: ", data);
+  const res = await axiosRest.post<Sale>(API_ROOT.SALES.POST, data, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  if (!res.data.id) {
+  console.log(res.data);
+  if (!res.data.sale.id) {
     console.error("Error creating sale:", res.statusText);
   }
   revalidatePath("/dashboard/sales");
-  redirect("/dashboard/sales"); */
-  const data = {
-    client: formData.get("client"),
-    product: formData.get("product"),
-  };
-  console.log("Data: ", data);
+  redirect("/dashboard/sales");
 }

@@ -25,7 +25,6 @@ export default function ComboProducts({
   }));
   return (
     <ComboBox
-      id="product"
       options={productsFormatted}
       placeholder="Busca el producto"
       onSelect={onSelect}

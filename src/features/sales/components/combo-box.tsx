@@ -24,13 +24,15 @@ interface ComboOption {
 }
 
 interface ComboProps {
-  id: string;
+  id?: string;
   options: ComboOption[];
   placeholder: string;
   onSelect?: (select: string) => void;
+  disabled?: boolean;
 }
 
-export function ComboBox({ id, options, placeholder, onSelect }: ComboProps) {
+export function ComboBox(props: ComboProps) {
+  const { id, options, placeholder, disabled = false, onSelect } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
@@ -40,10 +42,11 @@ export function ComboBox({ id, options, placeholder, onSelect }: ComboProps) {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
+            disabled={disabled}
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between"
+            className="justify-between"
           >
             {value
               ? options.find((option) => option.value === value)?.label
@@ -53,7 +56,7 @@ export function ComboBox({ id, options, placeholder, onSelect }: ComboProps) {
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
           <Command className="bg-background w-full">
-            <CommandInput placeholder="Busca ..." className="h-9" />
+            <CommandInput placeholder="Buscar ..." className="h-9" />
             <CommandList>
               <CommandEmpty>No se encontró ningún resultado.</CommandEmpty>
               <CommandGroup className="bg-background">
