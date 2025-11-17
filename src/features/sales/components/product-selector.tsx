@@ -46,7 +46,6 @@ export function ProductSelector() {
       });
     }
 
-    // reset después de añadir
     setProductId("");
     setVariantId("");
     setQuantity(1);
