@@ -3,58 +3,105 @@ import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Trash2, Plus, ShoppingCart, DollarSign } from 'lucide-react';
 
-// Data ficticia
 const MOCK_CLIENTS = [
-  { id: 'client-1', name: 'Juan', lastName: 'Pérez', documentNumber: '12345678' },
-  { id: 'client-2', name: 'María', lastName: 'García', documentNumber: '87654321' },
-  { id: 'client-3', name: 'Carlos', lastName: 'López', documentNumber: '11223344' },
-  { id: 'client-4', name: 'Ana', lastName: 'Martínez', documentNumber: '55667788' },
+  {
+    id: 'c665c00d-287c-4b28-9cd2-6d3325ed9942',
+    name: 'Rodrigo',
+    lastname: 'Gamarra',
+    phone: '987654321',
+    direccion: 'Huacho'
+  },
+  {
+    id: 'eed7efcb-c15b-4851-9949-f6c21548282d',
+    name: 'Harold',
+    lastname: 'Colan',
+    phone: '987654321',
+    direccion: 'Lima'
+  },
+  {
+    id: '055fc618-2feb-4d8a-a70b-0939e9b20455',
+    name: 'ALAN',
+    lastname: 'DADWAD',
+    phone: '987654321',
+    direccion: 'HUACHO'
+  },
+  {
+    id: 'b769c3b4-d968-4e95-900d-5bc9be4aa771',
+    name: 'dadwda',
+    lastname: 'dawdawdwa',
+    phone: '987654321',
+    direccion: 'Lima'
+  },
 ];
 
 const MOCK_PRODUCTS = [
-  { id: 'prod-1', title: 'Camiseta Básica', sku: 'CAM-001' },
-  { id: 'prod-2', title: 'Pantalón Jeans', sku: 'PAN-002' },
-  { id: 'prod-3', title: 'Zapatillas Deportivas', sku: 'ZAP-003' },
-  { id: 'prod-4', title: 'Chaqueta de Cuero', sku: 'CHA-004' },
-  { id: 'prod-5', title: 'Gorra Casual', sku: 'GOR-005' },
+  {
+    id: '68421261-a6c9-4e3e-99ef-7593d1f21c9d',
+    title: 'Nike Air Force',
+    sku: 'nike_air_force',
+    price: 400,
+    imageUrl: 'https://res.cloudinary.com/dn59rxcsm/image/upload/v1763334747/r3vldkw5y6n23t7hkv2q.webp',
+    category: {
+      id: '407c3595-a56f-45f3-898b-9e0d62d0a84f',
+      name: 'sneaker',
+      description: 'All sneaker models'
+    },
+    variantProduct: [
+      {
+        id: 'b4dfaa19-7492-4e29-8d6f-77e603814e97',
+        sizes: '42',
+        color: 'White',
+        stock: 1
+      },
+      {
+        id: '59ce8acb-f94b-4024-b046-a48482c97af2',
+        sizes: '40',
+        color: 'Red',
+        stock: 1
+      }
+    ]
+  },
+  {
+    id: '04798664-5eb6-406a-89f3-d1bb2d1d321c',
+    title: 'Adidas Campus V1',
+    sku: 'adidas_campus_v1',
+    price: 450,
+    imageUrl: 'https://res.cloudinary.com/dn59rxcsm/image/upload/v1763334796/saaslviqaeslgrzcmxqx.jpg',
+    category: {
+      id: '407c3595-a56f-45f3-898b-9e0d62d0a84f',
+      name: 'sneaker',
+      description: 'All sneaker models'
+    },
+    variantProduct: [
+      {
+        id: '9588d488-beae-46b1-bc06-87b9028e888c',
+        sizes: '42',
+        color: 'Militar',
+        stock: 20
+      }
+    ]
+  },
+  {
+    id: '6b7dcb97-7d82-43ad-8e37-bd2336ffcaf8',
+    title: 'Adidas Stan Smith',
+    sku: 'adidas_stan_smith',
+    price: 250,
+    imageUrl: 'https://res.cloudinary.com/dn59rxcsm/image/upload/v1763334822/qurlot1nsc4r3veoq5hb.webp',
+    category: {
+      id: '407c3595-a56f-45f3-898b-9e0d62d0a84f',
+      name: 'sneaker',
+      description: 'All sneaker models'
+    },
+    variantProduct: [
+      {
+        id: '39b400f4-69c6-490d-a171-c5e754a78d27',
+        sizes: '39',
+        color: 'White',
+        stock: 10
+      }
+    ]
+  }
 ];
-
-const MOCK_VARIANTS = {
-  'prod-1': [
-    { id: 'var-1-1', sizes: 'S', color: 'Rojo', stock: 15 },
-    { id: 'var-1-2', sizes: 'M', color: 'Rojo', stock: 20 },
-    { id: 'var-1-3', sizes: 'L', color: 'Rojo', stock: 10 },
-    { id: 'var-1-4', sizes: 'S', color: 'Azul', stock: 8 },
-    { id: 'var-1-5', sizes: 'M', color: 'Azul', stock: 12 },
-    { id: 'var-1-6', sizes: 'L', color: 'Azul', stock: 5 },
-  ],
-  'prod-2': [
-    { id: 'var-2-1', sizes: '28', color: 'Negro', stock: 6 },
-    { id: 'var-2-2', sizes: '30', color: 'Negro', stock: 10 },
-    { id: 'var-2-3', sizes: '32', color: 'Negro', stock: 8 },
-    { id: 'var-2-4', sizes: '34', color: 'Azul', stock: 12 },
-    { id: 'var-2-5', sizes: '36', color: 'Azul', stock: 4 },
-  ],
-  'prod-3': [
-    { id: 'var-3-1', sizes: '38', color: 'Blanco', stock: 15 },
-    { id: 'var-3-2', sizes: '39', color: 'Blanco', stock: 20 },
-    { id: 'var-3-3', sizes: '40', color: 'Blanco', stock: 18 },
-    { id: 'var-3-4', sizes: '41', color: 'Negro', stock: 25 },
-    { id: 'var-3-5', sizes: '42', color: 'Negro', stock: 10 },
-    { id: 'var-3-6', sizes: '43', color: 'Negro', stock: 8 },
-  ],
-  'prod-4': [
-    { id: 'var-4-1', sizes: 'S', color: 'Marrón', stock: 3 },
-    { id: 'var-4-2', sizes: 'M', color: 'Marrón', stock: 5 },
-    { id: 'var-4-3', sizes: 'L', color: 'Marrón', stock: 4 },
-    { id: 'var-4-4', sizes: 'XL', color: 'Negro', stock: 6 },
-  ],
-  'prod-5': [
-    { id: 'var-5-1', sizes: 'Única', color: 'Rojo', stock: 30 },
-    { id: 'var-5-2', sizes: 'Única', color: 'Negro', stock: 25 },
-    { id: 'var-5-3', sizes: 'Única', color: 'Blanco', stock: 20 },
-  ],
-};
 
 const SalesForm = () => {
   const [clients, setClients] = useState([]);
@@ -83,10 +130,10 @@ const SalesForm = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       setLoadingData(true);
-      
+
       // Simular delay de red
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       setClients(MOCK_CLIENTS);
       setProducts(MOCK_PRODUCTS);
       setLoadingData(false);
@@ -96,19 +143,20 @@ const SalesForm = () => {
   }, []);
 
   // Cargar variantes cuando se selecciona un producto
-  const loadVariants = async (productId) => {
+  const loadVariants = (productId) => {
     if (!productId) return;
 
     // Si ya tenemos las variantes en cache, no volver a cargarlas
     if (variantsByProduct[productId]) return;
 
-    // Simular delay de red
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    setVariantsByProduct(prev => ({
-      ...prev,
-      [productId]: MOCK_VARIANTS[productId] || []
-    }));
+    const product = products.find(p => p.id === productId);
+
+    if (product && product.variantProduct) {
+      setVariantsByProduct(prev => ({
+        ...prev,
+        [productId]: product.variantProduct
+      }));
+    }
   };
 
   // Calcular el total de la venta
@@ -130,6 +178,18 @@ const SalesForm = () => {
   const getProductName = (productId) => {
     const product = products.find(p => p.id === productId);
     return product ? product.title : '';
+  };
+
+  // Obtener precio del producto
+  const getProductPrice = (productId) => {
+    const product = products.find(p => p.id === productId);
+    return product ? product.price : 0;
+  };
+
+  // Auto-completar precio cuando se selecciona un producto
+  const handleProductChange = (productId, index) => {
+    loadVariants(productId);
+    // El precio se puede autocompletar si quieres
   };
 
   // Enviar el formulario (simulado)
@@ -197,7 +257,7 @@ const SalesForm = () => {
       };
 
       setSaleResult(result);
-      
+
       // Resetear el formulario
       reset();
       setVariantsByProduct({});
@@ -222,43 +282,43 @@ const SalesForm = () => {
 
   if (loadingData) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Cargando datos...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto"></div>
+          <p className="mt-4">Cargando datos...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen py-8 px-4">
       <div className="max-w-4xl mx-auto space-y-6">
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="rounded-lg shadow-md p-6">
           {/* Header */}
           <div className="flex items-center gap-3 mb-6 pb-4 border-b">
-            <ShoppingCart className="w-8 h-8 text-blue-600" />
-            <h1 className="text-2xl font-bold text-gray-800">Nueva Venta</h1>
+            <ShoppingCart className="w-8 h-8" />
+            <h1 className="text-2xl font-bold">Nueva Venta</h1>
           </div>
 
           <div className="space-y-6">
             {/* Información del Cliente */}
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h2 className="text-lg font-semibold text-gray-700 mb-4">Información del Cliente</h2>
-              
+            <div className="p-4 rounded-lg">
+              <h2 className="text-lg font-semibold mb-4">Información del Cliente</h2>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium mb-1">
                     Cliente <span className="text-red-500">*</span>
                   </label>
                   <select
                     {...register('clientId', { required: 'Selecciona un cliente' })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2"
                   >
                     <option value="">Selecciona un cliente</option>
                     {clients.map(client => (
                       <option key={client.id} value={client.id}>
-                        {client.name} {client.lastName} - DNI: {client.documentNumber}
+                        {client.name} {client.lastname} - {client.phone}
                       </option>
                     ))}
                   </select>
@@ -268,12 +328,12 @@ const SalesForm = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium mb-1">
                     Estado de la Venta
                   </label>
                   <select
                     {...register('status')}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2"
                   >
                     <option value="COMPLETED">Completada</option>
                     <option value="PENDING">Pendiente</option>
@@ -285,11 +345,11 @@ const SalesForm = () => {
             {/* Detalles de la Venta */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-700">Productos</h2>
+                <h2 className="text-lg font-semibold">Productos</h2>
                 <button
                   type="button"
                   onClick={() => append({ productId: '', variantProductId: '', quantity: 1, unitPrice: 0 })}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+                  className="flex items-center gap-2 px-4 py-2 transition"
                 >
                   <Plus className="w-4 h-4" />
                   Agregar Producto
@@ -302,11 +362,12 @@ const SalesForm = () => {
                   const selectedVariantId = watchDetails[index]?.variantProductId;
                   const variants = variantsByProduct[selectedProductId] || [];
                   const variantInfo = getVariantInfo(selectedProductId, selectedVariantId);
+                  const selectedProduct = products.find(p => p.id === selectedProductId);
 
                   return (
-                    <div key={field.id} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div key={field.id} className="p-4 rounded-lg border">
                       <div className="flex items-start justify-between mb-3">
-                        <span className="text-sm font-medium text-gray-600">Producto #{index + 1}</span>
+                        <span className="text-sm font-medium">Producto #{index + 1}</span>
                         {fields.length > 1 && (
                           <button
                             type="button"
@@ -321,20 +382,20 @@ const SalesForm = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Seleccionar Producto */}
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium mb-1">
                             Producto <span className="text-red-500">*</span>
                           </label>
                           <select
-                            {...register(`details.${index}.productId`, { 
+                            {...register(`details.${index}.productId`, {
                               required: 'Selecciona un producto',
-                              onChange: (e) => loadVariants(e.target.value)
+                              onChange: (e) => handleProductChange(e.target.value, index)
                             })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2"
                           >
                             <option value="">Selecciona un producto</option>
                             {products.map(product => (
                               <option key={product.id} value={product.id}>
-                                {product.title} - {product.sku}
+                                {product.title} - {product.sku} (S/. {product.price})
                               </option>
                             ))}
                           </select>
@@ -342,15 +403,15 @@ const SalesForm = () => {
 
                         {/* Seleccionar Variante */}
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium mb-1">
                             Variante <span className="text-red-500">*</span>
                           </label>
                           <select
-                            {...register(`details.${index}.variantProductId`, { 
-                              required: 'Selecciona una variante' 
+                            {...register(`details.${index}.variantProductId`, {
+                              required: 'Selecciona una variante'
                             })}
                             disabled={!selectedProductId}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 disabled:bg-gray-100 disabled:cursor-not-allowed"
                           >
                             <option value="">
                               {selectedProductId ? 'Selecciona una variante' : 'Primero selecciona un producto'}
@@ -365,25 +426,25 @@ const SalesForm = () => {
 
                         {/* Cantidad */}
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium mb-1">
                             Cantidad <span className="text-red-500">*</span>
                           </label>
                           <input
                             type="number"
                             min="1"
                             step="1"
-                            {...register(`details.${index}.quantity`, { 
+                            {...register(`details.${index}.quantity`, {
                               required: 'Ingresa la cantidad',
                               min: { value: 1, message: 'Mínimo 1' },
-                              max: variantInfo ? { 
-                                value: variantInfo.stock, 
-                                message: `Stock disponible: ${variantInfo.stock}` 
+                              max: variantInfo ? {
+                                value: variantInfo.stock,
+                                message: `Stock disponible: ${variantInfo.stock}`
                               } : undefined
                             })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2"
                           />
                           {variantInfo && (
-                            <p className="mt-1 text-xs text-gray-500">
+                            <p className="mt-1 text-xs">
                               Stock disponible: {variantInfo.stock} unidades
                             </p>
                           )}
@@ -396,7 +457,7 @@ const SalesForm = () => {
 
                         {/* Precio Unitario */}
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium mb-1">
                             Precio Unitario (S/.) <span className="text-red-500">*</span>
                           </label>
                           <input
@@ -404,21 +465,43 @@ const SalesForm = () => {
                             min="0"
                             step="0.01"
                             placeholder="0.00"
-                            {...register(`details.${index}.unitPrice`, { 
+                            defaultValue={selectedProduct?.price || 0}
+                            {...register(`details.${index}.unitPrice`, {
                               required: 'Ingresa el precio',
                               min: { value: 0.01, message: 'Precio debe ser mayor a 0' }
                             })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2"
                           />
+                          {selectedProduct && (
+                            <p className="mt-1 text-xs">
+                              Precio sugerido: S/. {selectedProduct.price}
+                            </p>
+                          )}
                         </div>
                       </div>
 
+                      {/* Imagen del Producto */}
+                      {selectedProduct && (
+                        <div className="mt-3 flex items-center gap-3 pt-3 border-t">
+                          <img
+                            src={selectedProduct.imageUrl}
+                            alt={selectedProduct.title}
+                            className="w-16 h-16 object-cover rounded-md border"
+                          />
+                          <div className="flex-1">
+                            <p className="text-sm font-medium">{selectedProduct.title}</p>
+                            <p className="text-xs">SKU: {selectedProduct.sku}</p>
+                            <p className="text-xs">Categoría: {selectedProduct.category.name}</p>
+                          </div>
+                        </div>
+                      )}
+
                       {/* Subtotal */}
                       {watchDetails[index]?.quantity > 0 && watchDetails[index]?.unitPrice > 0 && (
-                        <div className="mt-3 pt-3 border-t border-gray-200">
+                        <div className="mt-3 pt-3 border-t">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-gray-600">Subtotal:</span>
-                            <span className="text-lg font-bold text-blue-600">
+                            <span className="text-sm font-medium">Subtotal:</span>
+                            <span className="text-lg font-bold">
                               S/. {(watchDetails[index].quantity * watchDetails[index].unitPrice).toFixed(2)}
                             </span>
                           </div>
@@ -431,13 +514,13 @@ const SalesForm = () => {
             </div>
 
             {/* Total */}
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <div className="p-4 rounded-lg border">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <DollarSign className="w-6 h-6 text-blue-600" />
-                  <span className="text-lg font-semibold text-gray-700">Total de la Venta:</span>
+                  <DollarSign className="w-6 h-6" />
+                  <span className="text-lg font-semibold">Total de la Venta:</span>
                 </div>
-                <span className="text-2xl font-bold text-blue-600">
+                <span className="text-2xl font-bold">
                   S/. {calculateTotal().toFixed(2)}
                 </span>
               </div>
@@ -449,7 +532,7 @@ const SalesForm = () => {
                 type="button"
                 onClick={handleFormSubmit}
                 disabled={loading}
-                className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="flex-1 px-6 py-3 font-medium rounded-md transition disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {loading ? 'Procesando...' : 'Crear Venta'}
               </button>
@@ -460,7 +543,7 @@ const SalesForm = () => {
                   setVariantsByProduct({});
                   setSaleResult(null);
                 }}
-                className="px-6 py-3 bg-gray-200 text-gray-700 font-medium rounded-md hover:bg-gray-300 transition"
+                className="px-6 py-3 font-medium rounded-md transition"
               >
                 Limpiar
               </button>
@@ -470,43 +553,44 @@ const SalesForm = () => {
 
         {/* Resultado de la Venta */}
         {saleResult && (
-          <div id="result-section" className="bg-green-50 rounded-lg shadow-md p-6 border-2 border-green-200">
-            <h2 className="text-xl font-bold text-green-800 mb-4">✅ {saleResult.message}</h2>
-            
+          <div id="result-section" className="rounded-lg shadow-md p-6 border-2">
+            <h2 className="text-xl font-bold mb-4">✅ {saleResult.message}</h2>
+
             <div className="space-y-4">
-              <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-semibold text-gray-700 mb-2">Información de la Venta</h3>
+              <div className="p-4 rounded-lg">
+                <h3 className="font-semibold mb-2">Información de la Venta</h3>
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <p><span className="font-medium">ID:</span> {saleResult.sale.id}</p>
                   <p><span className="font-medium">Total:</span> S/. {saleResult.sale.total.toFixed(2)}</p>
-                  <p><span className="font-medium">Cliente:</span> {saleResult.sale.client.name} {saleResult.sale.client.lastName}</p>
-                  <p><span className="font-medium">DNI:</span> {saleResult.sale.client.documentNumber}</p>
+                  <p><span className="font-medium">Cliente:</span> {saleResult.sale.client.name} {saleResult.sale.client.lastname}</p>
+                  <p><span className="font-medium">Teléfono:</span> {saleResult.sale.client.phone}</p>
+                  <p className="col-span-2"><span className="font-medium">Dirección:</span> {saleResult.sale.client.direccion}</p>
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-semibold text-gray-700 mb-3">Productos Vendidos</h3>
+              <div className="p-4 rounded-lg">
+                <h3 className="font-semibold mb-3">Productos Vendidos</h3>
                 <div className="space-y-2">
                   {saleResult.sale.details.map((detail, idx) => (
-                    <div key={idx} className="flex justify-between items-start p-2 bg-gray-50 rounded">
+                    <div key={idx} className="flex justify-between items-start p-2">
                       <div className="flex-1">
                         <p className="font-medium text-sm">{detail.productName}</p>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-xs">
                           Talla: {detail.variantInfo?.sizes} | Color: {detail.variantInfo?.color}
                         </p>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-xs">
                           Cantidad: {detail.quantity} × S/. {detail.unitPrice.toFixed(2)}
                         </p>
                       </div>
-                      <p className="font-bold text-blue-600">S/. {detail.subtotal.toFixed(2)}</p>
+                      <p className="font-bold">S/. {detail.subtotal.toFixed(2)}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-semibold text-gray-700 mb-2">Payload Enviado al Backend</h3>
-                <pre className="bg-gray-900 text-green-400 p-3 rounded text-xs overflow-x-auto">
+              <div className="p-4 rounded-lg">
+                <h3 className="font-semibold mb-2">Payload Enviado al Backend</h3>
+                <pre className="p-3 rounded text-xs overflow-x-auto">
                   {JSON.stringify(saleResult.payload, null, 2)}
                 </pre>
               </div>
