@@ -1,5 +1,5 @@
 import { getClients } from "@/src/features/clients/actions/get-clients.action";
-import { ComboBox } from "./combo-box";
+import { ComboBox } from "@/src/shared/components/ui/combo-box";
 
 export async function ComboClients() {
   const clients = await getClients();

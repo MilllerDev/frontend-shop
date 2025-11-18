@@ -3,7 +3,7 @@
 import { Input } from "@/src/shared/components/ui/input";
 import { Label } from "@/src/shared/components/ui/label";
 import { Client } from "@/src/shared/types/client";
-import { updateClient } from "../actions/update-client";
+import { updateClient } from "../actions/update-client.action";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { Button } from "@/src/shared";

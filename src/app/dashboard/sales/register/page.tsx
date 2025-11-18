@@ -1,6 +1,6 @@
 import { CreateClientForm } from "@/src/features/clients/components/create-client-form";
-import { createSale } from "@/src/features/sales/actions/create-sale";
-import { ComboClients } from "@/src/features/sales/components/combo-clients";
+import { createSale } from "@/src/features/sales/actions/create-sale.action";
+import { ComboClients } from "@/src/shared/components/ui/combo-clients";
 import { ProductSelector } from "@/src/features/sales/components/product-selector";
 import SummarySale from "@/src/features/sales/components/summary-sale";
 import { Button } from "@/src/shared";
@@ -9,14 +9,12 @@ import { Badge } from "@/src/shared/components/ui/badge";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
 import { Label } from "@/src/shared/components/ui/label";
 import { Modal } from "@/src/shared/components/ui/modal";
 import { Plus } from "lucide-react";
-import Link from "next/link";
 
 export default function RegisterSalePage() {
   return (
@@ -67,17 +65,6 @@ export default function RegisterSalePage() {
                   <ProductSelector />
                 </div>
               </CardContent>
-              <CardFooter>
-                <Link
-                  href="/dashboard/sales"
-                  className="flex-1 border border-gray-100 rounded-md p-2 text-center text-sm font-medium"
-                >
-                  Cancelar
-                </Link>
-                <Button type="submit" className="flex-1">
-                  Guardar Cambios
-                </Button>
-              </CardFooter>
             </Card>
           </div>
           <Card className="col-span-1 h-fit">
@@ -86,9 +73,7 @@ export default function RegisterSalePage() {
                 <Badge>3</Badge>Resumen de la venta
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <SummarySale />
-            </CardContent>
+            <SummarySale />
           </Card>
         </div>
       </form>

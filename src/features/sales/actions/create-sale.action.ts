@@ -14,8 +14,8 @@ export async function createSale(formData: FormData) {
 
   const data = {
     clientId: formData.get("client") as string,
-    /*     status: formData.get("status") as string,
-     */ ...JSON.parse(rawPayload),
+    status: formData.get("status") as string,
+    ...JSON.parse(rawPayload),
   };
 
   console.log("Data: ", data);
@@ -27,6 +27,7 @@ export async function createSale(formData: FormData) {
   if (!res.data.sale.id) {
     console.error("Error creating sale:", res.statusText);
   }
+
   revalidatePath("/dashboard/sales");
   redirect("/dashboard/sales");
 }

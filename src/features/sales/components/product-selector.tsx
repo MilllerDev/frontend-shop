@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ComboProducts from "./combo-products";
-import { ComboBox } from "./combo-box";
 import { Button } from "@/src/shared";
 import { useSaleStore } from "@/src/features/sales/store/sale.store";
 import { getProductById } from "../../products/actions/get-products.action";
@@ -20,6 +18,8 @@ import {
   SelectValue,
 } from "@/src/shared/components/ui/select";
 import { salePayload } from "@/src/lib/utils";
+import { ComboBox } from "@/src/shared/components/ui/combo-box";
+import ComboProducts from "@/src/shared/components/ui/combo-products";
 
 export function ProductSelector() {
   const { addItem, items } = useSaleStore();
@@ -34,31 +34,18 @@ export function ProductSelector() {
   useEffect(() => {
     async function load() {
       if (!productId) return;
-      const products = await getProductById(productId);
-      setProductInfo(products);
-      setVariants(products.variantProduct);
+      const product = await getProductById(productId);
+      setProductInfo(product);
+      setVariants(product.variantProduct);
     }
     load();
   }, [productId]);
 
-  const variantStock = variants.find((v) => v.id === variantId)?.stock ?? "0";
+  const variant = variants.find((v) => v.id === variantId);
   const handleAdd = () => {
-    const variant = variants.find((v) => v.id === variantId);
     if (!variant) return;
     if (productInfo) {
-      addItem({
-        id: productId,
-        category: productInfo.category,
-        sku: productInfo.sku,
-        name: productInfo.title,
-        imageUrl: productInfo.imageUrl,
-        variantId: variant.id,
-        color: variant.color,
-        size: variant.sizes,
-        stock: variant.stock,
-        quantity,
-        price: productInfo.price,
-      });
+      addItem(productInfo, variant, quantity);
     }
     setVariantId("");
     setQuantity(1);
@@ -71,7 +58,10 @@ export function ProductSelector() {
         <Label className="col-span-2">Elije el producto y su variante</Label>
         <ComboProducts onSelect={setProductId} />
         <ComboBox
-          disabled={!productId && variants.length < 1}
+          disabled={
+            (!productId && variants.length < 1) ||
+            Number(variant?.stock) === quantity
+          }
           id="variant"
           options={variants.map((v) => ({
             value: v.id,
@@ -101,7 +91,7 @@ export function ProductSelector() {
                   size="icon-sm"
                   onClick={() =>
                     setQuantity((prev) =>
-                      Math.min(prev + 1, Number(variantStock))
+                      Math.min(prev + 1, Number(variant?.stock))
                     )
                   }
                 >

@@ -19,8 +19,8 @@ export function salePayload(items: CartItem[]) {
   return {
     details: items.map((item) => ({
       quantity: item.quantity,
-      unitPrice: item.price,
-      variantProductId: item.variantId,
+      unitPrice: item.product.price,
+      variantProductId: item.variant.id,
     })),
   };
 }

@@ -1,8 +1,13 @@
 "use client";
 
 import { Loader } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, useTransition } from "react";
 import { useFormStatus } from "react-dom";
+import { Button } from "./button";
+import { useRouter } from "next/navigation";
+import { createSale } from "@/src/features/sales/actions/create-sale.action";
+import { toast } from "sonner";
+import { useSaleStore } from "@/src/features/sales/store/sale.store";
 
 export function Submit({ children }: { children: ReactNode }) {
   const { pending } = useFormStatus();
@@ -23,5 +28,31 @@ export function Submit({ children }: { children: ReactNode }) {
         children
       )}
     </button>
+  );
+}
+
+export function SumbitSale() {
+  const router = useRouter();
+  const { pending } = useFormStatus();
+  const { clear } = useSaleStore();
+
+  return (
+    <div className="flex flex-row gap-4 w-full">
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="flex-1"
+        onClick={() => {
+          clear();
+          router.back();
+        }}
+      >
+        Cancelar
+      </Button>
+      <Button type="submit" size="sm" className="flex-1">
+        {pending ? "Guardando ..." : "Guardar"}
+      </Button>
+    </div>
   );
 }

@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../products/actions/get-products.action";
-import { ComboBox } from "./combo-box";
 import { Product } from "@/src/shared/types/product";
+import { ComboBox } from "@/src/shared/components/ui/combo-box";
+import { getAllProducts } from "@/src/features/products/actions/get-products.action";
 
 export default function ComboProducts({
   onSelect,
