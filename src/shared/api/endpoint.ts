@@ -16,14 +16,16 @@ export const API_ROOT = {
     CREATE: "/products",
     BY_ID: (id: string) => `/products/${id}`,
   },
-<<<<<<< Updated upstream
   SALES: {
     GET: "/sales",
     POST: "/sales",
   },
-=======
   DASHBOARD: {
     GET: "/dashboard",
+  },
+  REPORTS: {
+    GET: "/reports",
+    POST: "/reports",
   }
->>>>>>> Stashed changes
+
 };

@@ -1,7 +1,9 @@
 import { Package } from "lucide-react";
 import { getUser } from "../actions/get-user.action";
 
+
 export default async function HeroSidebar() {
+
   const user = await getUser();
 
   return (
