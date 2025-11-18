@@ -1,4 +1,3 @@
-import SaleForm from "@/src/features/sales/components/sale-form";
 import SaleTable from "@/src/features/sales/components/sale-table";
 import {
   Card,

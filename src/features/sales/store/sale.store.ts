@@ -1,63 +1,53 @@
+import { Product } from "@/src/shared/types/product";
+import { VariantProduct } from "@/src/shared/types/variant";
 import { create } from "zustand";
 
-interface CartItem {
-  id: string;
-  productId: string;
-  productName: string;
-  variantId: string;
-  color: string;
-  size: string;
-  stock: string;
+export interface CartItem {
+  product: Product;
   quantity: number;
-  price: string;
+  variant: VariantProduct;
 }
 
 interface SaleStore {
-  clientId: string;
   items: CartItem[];
-  setClient: (id: string) => void;
-  addItem: (item: CartItem) => void;
+  addItem: (
+    product: Product,
+    variant: VariantProduct,
+    quantity: number
+  ) => void;
   removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
   clear: () => void;
 }
 
 export const useSaleStore = create<SaleStore>((set) => ({
-  clientId: "",
   items: [],
 
-  setClient: (id) =>
-    set(() => ({
-      clientId: id,
-    })),
-
-  addItem: (newItem) =>
+  addItem: (product, variant, quantity) =>
     set((state) => {
-      const exists = state.items.find((i) => i.id === newItem.id);
+      const exists = state.items.find((i) => i.variant.id === variant.id);
+
+      const stock = Number(variant.stock);
 
       if (exists) {
+        const newQuantity = exists.quantity + quantity;
+        const maxQuantity = Math.min(newQuantity, stock);
         return {
           items: state.items.map((i) =>
-            i.id === newItem.id
-              ? { ...i, quantity: i.quantity + newItem.quantity }
-              : i
+            i.variant.id === variant.id ? { ...i, quantity: maxQuantity } : i
           ),
         };
       }
 
+      const finalQuantity = Math.min(quantity, stock);
+
       return {
-        items: [...state.items, newItem],
+        items: [...state.items, { product, variant, quantity: finalQuantity }],
       };
     }),
 
-  updateQuantity: (id, quantity) =>
-    set((state) => ({
-      items: state.items.map((i) => (i.id === id ? { ...i, quantity } : i)),
-    })),
-
   removeItem: (id) =>
     set((state) => ({
-      items: state.items.filter((i) => i.id !== id),
+      items: state.items.filter((i) => i.variant.id !== id),
     })),
 
   clear: () =>

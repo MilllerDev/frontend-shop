@@ -28,7 +28,7 @@ export async function createClient(inputs: InputClient) {
       console.error("Error al crear el cliente");
       return;
     }
-    revalidatePath("/dashboard/");
+    revalidatePath("/dashboard");
 
     return res.data;
   } catch (error) {
