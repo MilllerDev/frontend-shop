@@ -23,7 +23,7 @@ export async function updateProduct(formData: FormData) {
   if (image && image.size > 0 && image.type.startsWith("image/")) {
     formToSend.append("image", image);
   }
-  console.log(formToSend);
+
   try {
     const res = await axiosRest.patch<Product>(
       API_ROOT.PRODUCTS.BY_ID(id),
@@ -36,11 +36,10 @@ export async function updateProduct(formData: FormData) {
       }
     );
     if (!res.status) {
-      console.error("Error al actualizar producto");
       return;
     }
   } catch (err: any) {
-    console.error("Error al hacer la petición: ", err.response?.data || err);
+    throw Error("Error al actualizar", err);
   }
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");

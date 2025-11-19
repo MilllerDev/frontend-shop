@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function proxy(request: NextRequest) {
-
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
@@ -13,13 +12,16 @@ export async function proxy(request: NextRequest) {
   }
 
   if (token) {
-    const resp = await fetch("http://localhost:4000/api/auth/verify-token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token }),
-    });
+    const resp = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/verify-token`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      }
+    );
     const { isValid } = await resp.json();
     if (isAuthPage && isValid)
       return NextResponse.redirect(new URL("/dashboard", request.url));

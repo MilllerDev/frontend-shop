@@ -11,6 +11,7 @@ import {
 } from "@/src/shared/components/ui/card";
 import { Plus } from "lucide-react";
 import { Suspense } from "react";
+import ClientSkeleton from "@/src/features/clients/components/skeleton";
 
 export default async function ClientPage() {
   const data = await getClients();
@@ -43,7 +44,7 @@ export default async function ClientPage() {
             </Modal>
           </div>
         </CardHeader>
-        <Suspense fallback={<div>Cargando datos</div>}>
+        <Suspense fallback={<ClientSkeleton />}>
           <ClientTable />
         </Suspense>
       </Card>

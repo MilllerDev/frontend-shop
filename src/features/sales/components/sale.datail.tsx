@@ -4,8 +4,14 @@ export default function SaleDetail({ sale }: { sale: Sale }) {
   return (
     <div className="space-y-2">
       <div className="flex flex-row gap-4 items-center border-b border-gray-200 pb-2">
+        <label className="text-sm font-semibold text-gray-600">Nombre del cliente</label>
+        <p className="text-base text-foreground font-medium">
+          {sale.client.name}
+        </p>
+      </div>
+      <div className="flex flex-row gap-4 items-center border-b border-gray-200 pb-2">
         <label className="text-sm font-semibold text-gray-600">
-          Número de orden
+          Número de la orden
         </label>
         <p className="text-base text-foreground font-medium">
           {sale.id.substring(0, 15).toUpperCase()}

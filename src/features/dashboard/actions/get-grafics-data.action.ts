@@ -1,6 +1,5 @@
 "use server"
 
-
 import axiosRest from "@/src/shared/api/axios-rest";
 import { API_ROOT } from "@/src/shared/api/endpoint";
 import { CategoriByProductGraficDonaut, GraficsEstadisticByMonth } from "@/src/shared/types/grafics-estadistics";

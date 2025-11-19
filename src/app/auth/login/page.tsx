@@ -1,20 +1,17 @@
-import Unauthorized from "@/src/features/auth/components/unauthorized"
-
-import Link from "next/link"
-import { LockKeyhole, Mail } from "lucide-react"
-import { login } from "@/src/features/auth/actions/login.action"
-import { Submit } from "@/src/shared"
+import { LockKeyhole, Mail } from "lucide-react";
+import { login } from "@/src/features/auth/actions/login.action";
+import SubmitSession from "@/src/features/auth/components/submit-session";
 
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>
+  searchParams: Promise<{ error?: string }>;
 }) {
-  const { error } = await searchParams
-  const show = error === "true"
+  const { error } = await searchParams;
+  const show = error === "true";
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950 p-4">
+    <div className="min-h-screen flex flex-col gap-4 items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950 p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
@@ -28,11 +25,16 @@ export default async function LoginPage({
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-purple-300 to-blue-400 bg-clip-text text-transparent text-center mb-2">
             Iniciar sesión
           </h1>
-          <p className="text-center text-purple-300/60 text-sm">Accede a tu panel de administrador</p>
+          <p className="text-center text-purple-300/60 text-sm">
+            Accede a tu panel de administrador
+          </p>
         </div>
 
         <div className="flex flex-col gap-2 mb-5">
-          <label htmlFor="mail" className="text-sm font-semibold text-purple-200 flex items-center gap-2">
+          <label
+            htmlFor="mail"
+            className="text-sm font-semibold text-purple-200 flex items-center gap-2"
+          >
             <Mail size={16} className="text-purple-400" />
             Correo Electrónico
           </label>
@@ -47,7 +49,10 @@ export default async function LoginPage({
         </div>
 
         <div className="flex flex-col gap-2 mb-6">
-          <label htmlFor="pass" className="text-sm font-semibold text-purple-200 flex items-center gap-2">
+          <label
+            htmlFor="pass"
+            className="text-sm font-semibold text-purple-200 flex items-center gap-2"
+          >
             <LockKeyhole size={16} className="text-purple-400" />
             Contraseña
           </label>
@@ -60,21 +65,18 @@ export default async function LoginPage({
             name="pass"
           />
         </div>
-
         <div className="w-full flex justify-center">
-          {/* Submit button */}
-          <Submit>Acceder</Submit>
+          <SubmitSession>Acceder</SubmitSession>
         </div>
-
-        <Link
-          href="/auth/change-password"
-          className="block text-center mt-6 text-sm font-medium text-purple-300 hover:text-purple-200 transition duration-300 underline underline-offset-2"
-        >
-          ¿Olvidaste tu contraseña?
-        </Link>
       </form>
 
-      {show && <Unauthorized />}
+      {show && (
+        <div className="max-w-md  border border-red-500 p-4 rounded-xl bg-red-100 w-fit mx-auto">
+          <p className="text-sm font-medium text-red-500">
+            Las credeneciales son incorrectas intentelo nuevamente
+          </p>
+        </div>
+      )}
     </div>
-  )
+  );
 }

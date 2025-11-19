@@ -21,7 +21,7 @@ export async function createProduct(formData: FormData) {
     const blob = image as Blob;
     formToSend.append("image", blob);
   }
-  console.log(formToSend);
+
   try {
     const res = await axiosRest.post<Product>(
       API_ROOT.PRODUCTS.CREATE,
@@ -35,14 +35,12 @@ export async function createProduct(formData: FormData) {
     );
 
     if (!res.data.id) {
-      console.error("Error al crear producto");
       return;
     }
 
     revalidatePath("/dashboard");
     return { ok: true };
   } catch (err: any) {
-    console.error("Error al hacer la petición: ", err.response?.data || err);
     return { ok: false };
   }
 }

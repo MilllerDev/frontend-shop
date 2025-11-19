@@ -1,5 +1,5 @@
 export * from "./providers/ThemeProvider"
 export * from "./ui/button"
-export * from "./ui/submit-client"
+export * from "../../features/sales/components/submit-sale"
 export * from "./ui/redirect-button"
 export * from "./ui/avatar"

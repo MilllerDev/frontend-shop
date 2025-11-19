@@ -43,9 +43,9 @@ export const saleColumns: ColumnDef<Sale>[] = [
         <div className="flex items-center justify-start gap-2">
           <Modal
             title={"Detalle de la venta"}
-            description={`Pedido realizado por ${
-              data.client.name
-            } el ${formatDate(data.createdAt.toString())}`}
+            description={`Venta registrada el ${formatDate(
+              data.saleDate.toString()
+            )}`}
             child={
               <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                 <Eye size={16} />
