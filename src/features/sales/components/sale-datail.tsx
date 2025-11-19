@@ -4,7 +4,9 @@ export default function SaleDetail({ sale }: { sale: Sale }) {
   return (
     <div className="space-y-2">
       <div className="flex flex-row gap-4 items-center border-b border-gray-200 pb-2">
-        <label className="text-sm font-semibold text-gray-600">Nombre del cliente</label>
+        <label className="text-sm font-semibold text-gray-600">
+          Nombre del cliente
+        </label>
         <p className="text-base text-foreground font-medium">
           {sale.client.name}
         </p>
@@ -17,33 +19,21 @@ export default function SaleDetail({ sale }: { sale: Sale }) {
           {sale.id.substring(0, 15).toUpperCase()}
         </p>
       </div>
+      <div className="flex flex-row gap-4 items-center border-b border-gray-200 pb-2">
+        <label className="text-sm font-semibold text-gray-600">
+          Estado de la compra
+        </label>
+        <p className="text-base text-foreground font-medium">
+          {sale.status.toString()}
+        </p>
+      </div>
       <div className="mt-6 border-b border-gray-200 pb-4">
         <div className="flex flex-row justify-between">
           <label className="text-sm font-semibold text-gray-600">
             {sale.details.length > 1
               ? "Detalles de la venta"
               : "Detalle de la venta"}
-          </label>{" "}
-          <div className="text-sm flex items-center">
-            <div
-              className={`flex items-center justify-center w-6 h-6 rounded-full mr-2 ${
-                sale.isActive ? "bg-green-100" : "bg-red-100"
-              }`}
-            >
-              <div
-                className={`w-2 h-2 rounded-full ${
-                  sale.isActive ? "bg-green-500" : "bg-red-500"
-                }`}
-              ></div>
-            </div>
-            <span
-              className={`font-medium ${
-                sale.isActive ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {sale.isActive ? "Activo" : "Inactivo"}
-            </span>
-          </div>
+          </label>
         </div>
         {sale.details.map((detail) => (
           <div key={detail.id} className="mt-2">

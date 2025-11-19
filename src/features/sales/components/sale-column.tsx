@@ -6,7 +6,7 @@ import { Modal } from "@/src/shared/components/ui/modal";
 import { Sale } from "@/src/shared/types/sale";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
-import SaleDetail from "./sale.datail";
+import SaleDetail from "./sale-datail";
 
 export const saleColumns: ColumnDef<Sale>[] = [
   {

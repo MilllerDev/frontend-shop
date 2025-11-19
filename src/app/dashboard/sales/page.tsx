@@ -1,11 +1,11 @@
 import SaleTable from "@/src/features/sales/components/sale-table";
+import SalesSkeleton from "@/src/features/sales/components/skeleton";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/src/shared/components/ui/card";
-import { Modal } from "@/src/shared/components/ui/modal";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -31,7 +31,7 @@ export default function SalesPage() {
             </Link>
           </div>
         </CardHeader>
-        <Suspense fallback={<div>Cargando</div>}>
+        <Suspense fallback={<SalesSkeleton />}>
           <SaleTable />
         </Suspense>
       </Card>

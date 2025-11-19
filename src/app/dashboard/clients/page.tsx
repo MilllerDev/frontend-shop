@@ -1,4 +1,3 @@
-import { getClients } from "@/src/features/clients/actions/get-clients.action";
 import ClientTable from "@/src/features/clients/components/client-table";
 import { CreateClientForm } from "@/src/features/clients/components/create-client-form";
 import { Modal } from "@/src/shared/components/ui/modal";
@@ -13,10 +12,7 @@ import { Plus } from "lucide-react";
 import { Suspense } from "react";
 import ClientSkeleton from "@/src/features/clients/components/skeleton";
 
-export default async function ClientPage() {
-  const data = await getClients();
-
-  console.log(data);
+export default function ClientPage() {
   return (
     <div className="min-h-screen bg-background pt-20 md:pt-8 px-4 md:px-8">
       <Card className="border-primary/30 bg-card/50 backdrop-blur">

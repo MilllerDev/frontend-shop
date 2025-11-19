@@ -60,7 +60,8 @@ export function ProductSelector() {
         <ComboBox
           disabled={
             (!productId && variants.length < 1) ||
-            Number(variant?.stock) === quantity
+            Number(variant?.stock) === quantity ||
+            Number(variant?.stock) === 0
           }
           id="variant"
           options={variants.map((v) => ({
@@ -72,14 +73,17 @@ export function ProductSelector() {
         />
         <SelectStatus />
         <div className="flex flex-col gap-2">
-          {variantId && <Label className="">Cantidad del producto</Label>}
+          {variantId && Number(variant?.stock) > 0 && (
+            <Label className="">Cantidad del producto</Label>
+          )}
           <div className="flex flex-row justify-between">
-            {variantId && (
+            {variantId && Number(variant?.stock) > 0 && (
               <div className="flex items-center gap-3">
                 <Button
                   type="button"
                   variant="outline"
                   size="icon-sm"
+                  disabled={quantity < 2 || quantity === Number(variant?.stock)}
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
                   <Minus />
@@ -89,6 +93,10 @@ export function ProductSelector() {
                   type="button"
                   variant="outline"
                   size="icon-sm"
+                  disabled={
+                    Number(variant?.stock) < 2 ||
+                    quantity === Number(variant?.stock)
+                  }
                   onClick={() =>
                     setQuantity((prev) =>
                       Math.min(prev + 1, Number(variant?.stock))
@@ -99,7 +107,7 @@ export function ProductSelector() {
                 </Button>
               </div>
             )}
-            {variantId && (
+            {variantId && Number(variant?.stock) > 0 && (
               <Button type="button" onClick={handleAdd}>
                 Añadir
               </Button>

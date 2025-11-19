@@ -13,7 +13,7 @@ export async function login(formData: FormData) {
 
   try {
     const res = await axiosRest.post(API_ROOT.AUTH.LOGIN, credentials);
-    console.log("login exitoso: ", res.data.token);
+
     if (res.data.token) {
       const cookieStore = await cookies();
       cookieStore.set("token", res.data.token, {
