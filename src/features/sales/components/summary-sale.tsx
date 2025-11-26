@@ -15,7 +15,7 @@ import { Trash2 } from "lucide-react";
 import { CardContent, CardFooter } from "@/src/shared/components/ui/card";
 
 export default function SummarySale() {
-  const { items, removeItem } = useSaleStore();
+  const { items, getTotal, removeItem } = useSaleStore();
 
   return items.length < 1 ? (
     <CardContent>
@@ -29,7 +29,7 @@ export default function SummarySale() {
         <Label className="text-muted-foreground text-sm font-medium">
           Detalle de los productos
         </Label>
-        <ItemGroup className="gap-1 mt-2">
+        <ItemGroup className="gap-1 my-2">
           {items.map(({ product, variant, quantity }) => (
             <Item key={variant.id} variant="muted" role="listitem" size="sm">
               <div className="font-medium flex flex-row items-center gap-4">
@@ -67,6 +67,12 @@ export default function SummarySale() {
             </Item>
           ))}
         </ItemGroup>
+        <Item variant="outline" size="sm" asChild>
+          <div className="flex-1 flex flex-row justify-between">
+            <span>Total: </span>
+            <span>S/ {getTotal()}</span>
+          </div>
+        </Item>
       </CardContent>
       <CardFooter>
         <SumbitSale />

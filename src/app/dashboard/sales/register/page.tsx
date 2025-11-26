@@ -24,8 +24,8 @@ export default function RegisterSalePage() {
         <p className="">Ingresa los datos para registrar la venta</p>
       </div>
       <form action={createSale}>
-        <div className="grid grid-cols-3 gap-6">
-          <div className="flex flex-col gap-4 col-span-2">
+        <div className="flex flex-col xl:grid xl:grid-cols-3 gap-4 xl:gap-6">
+          <div className="flex flex-col gap-4 xl:col-span-2">
             <Card>
               <CardHeader>
                 <CardTitle className="flex flex-row gap-2 items-center">
@@ -67,7 +67,7 @@ export default function RegisterSalePage() {
               </CardContent>
             </Card>
           </div>
-          <Card className="col-span-1 h-fit">
+          <Card className="xl:col-span-1 h-fit">
             <CardHeader>
               <CardTitle className="flex flex-row gap-2 items-center">
                 <Badge>3</Badge>Resumen de la venta

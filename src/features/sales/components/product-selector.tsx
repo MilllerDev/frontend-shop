@@ -58,11 +58,7 @@ export function ProductSelector() {
         <Label className="col-span-2">Elije el producto y su variante</Label>
         <ComboProducts onSelect={setProductId} />
         <ComboBox
-          disabled={
-            (!productId && variants.length < 1) ||
-            Number(variant?.stock) === quantity ||
-            Number(variant?.stock) === 0
-          }
+          disabled={!productId && variants.length < 1}
           id="variant"
           options={variants.map((v) => ({
             value: v.id,
@@ -83,7 +79,7 @@ export function ProductSelector() {
                   type="button"
                   variant="outline"
                   size="icon-sm"
-                  disabled={quantity < 2 || quantity === Number(variant?.stock)}
+                  disabled={quantity < 2}
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
                   <Minus />

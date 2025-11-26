@@ -16,10 +16,11 @@ interface SaleStore {
     quantity: number
   ) => void;
   removeItem: (id: string) => void;
+  getTotal: () => number;
   clear: () => void;
 }
 
-export const useSaleStore = create<SaleStore>((set) => ({
+export const useSaleStore = create<SaleStore>((set, get) => ({
   items: [],
 
   addItem: (product, variant, quantity) =>
@@ -49,6 +50,14 @@ export const useSaleStore = create<SaleStore>((set) => ({
     set((state) => ({
       items: state.items.filter((i) => i.variant.id !== id),
     })),
+
+  getTotal: () => {
+    const items = get().items;
+    return items.reduce((total, item) => {
+      const price = Number(item.product.price);
+      return total + price * item.quantity;
+    }, 0);
+  },
 
   clear: () =>
     set(() => ({
